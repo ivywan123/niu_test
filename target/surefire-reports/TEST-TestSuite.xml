@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="1" failures="0" name="TestSuite" time="7.771" errors="0" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_111\jre\bin"/>
+    <property name="java.vm.version" value="25.111-b14"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\work\CattleTest"/>
+    <property name="java.runtime.version" value="1.8.0_111-b14"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="basedir" value="D:\work\CattleTest"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_111\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="surefire.real.class.path" value="D:\work\CattleTest\target\surefire\surefirebooter8615870390459153827.jar"/>
+    <property name="java.io.tmpdir" value="C:\Users\yuge.ly\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_111\jre\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:/Program Files/Java/jre1.8.0_111/bin/server;C:/Program Files/Java/jre1.8.0_111/bin;C:/Program Files/Java/jre1.8.0_111/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;D:\adt-bundle-windows\sdk\tools;D:\adt-bundle-windows\sdk\platform-tools;C:\Program Files\apache-maven-3.3.3\bin;C:\Program Files\TortoiseSVN\bin;D:\Program Files (x86)\VisualSVN\bin;C:\Program Files\Java\jdk1.8.0_111\bin;%ANDROID_SDK_HOME%\tools;D:\Program Files\apache-ant-1.9.5\bin;C:\Python27;D:\Program Files (x86)\Git\bin;D:\apache-tomcat-7.0.68\bin;D:\apache-tomcat-7.0.68\lib;D:\mysql-5.6.24-winx64\bin;D:\Program Files\nodejs\;D:\gradle-3.1/bin;C:\Program Files (x86)\SSH Communications Security\SSH Secure Shell;C:\Users\yuge.ly\AppData\Roaming\npm;D:\eclipse;;."/>
+    <property name="surefire.test.class.path" value="D:\work\CattleTest\target\test-classes;D:\work\CattleTest\target\classes;D:\Users\yuge.ly\.m2\repository\mysql\mysql-connector-java\6.0.6\mysql-connector-java-6.0.6.jar;D:\work\CattleTest\lib\testng-6.8.jar;D:\Users\yuge.ly\.m2\repository\org\slf4j\slf4j-api\1.6.6\slf4j-api-1.6.6.jar;D:\Users\yuge.ly\.m2\repository\org\slf4j\slf4j-log4j12\1.6.6\slf4j-log4j12-1.6.6.jar;D:\Users\yuge.ly\.m2\repository\log4j\log4j\1.2.16\log4j-1.2.16.jar;D:\Users\yuge.ly\.m2\repository\com\jayway\jsonpath\json-path-assert\2.2.0\json-path-assert-2.2.0.jar;D:\Users\yuge.ly\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;D:\Users\yuge.ly\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;D:\Users\yuge.ly\.m2\repository\com\jayway\jsonpath\json-path\2.2.0\json-path-2.2.0.jar;D:\Users\yuge.ly\.m2\repository\net\minidev\json-smart\2.2.1\json-smart-2.2.1.jar;D:\Users\yuge.ly\.m2\repository\net\minidev\accessors-smart\1.1\accessors-smart-1.1.jar;D:\Users\yuge.ly\.m2\repository\org\ow2\asm\asm\5.0.3\asm-5.0.3.jar;D:\Users\yuge.ly\.m2\repository\org\apache\httpcomponents\httpmime\4.5\httpmime-4.5.jar;D:\Users\yuge.ly\.m2\repository\org\apache\httpcomponents\httpclient\4.5\httpclient-4.5.jar;D:\Users\yuge.ly\.m2\repository\org\apache\httpcomponents\httpcore\4.4.6\httpcore-4.4.6.jar;D:\Users\yuge.ly\.m2\repository\org\apache\httpcomponents\httpclient-cache\4.5\httpclient-cache-4.5.jar;D:\Users\yuge.ly\.m2\repository\commons-codec\commons-codec\1.4\commons-codec-1.4.jar;D:\Users\yuge.ly\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar;D:\Users\yuge.ly\.m2\repository\commons-httpclient\commons-httpclient\3.0.1\commons-httpclient-3.0.1.jar;D:\Users\yuge.ly\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;D:\Users\yuge.ly\.m2\repository\net\sourceforge\jexcelapi\jxl\2.6.12\jxl-2.6.12.jar;D:\Users\yuge.ly\.m2\repository\net\sf\json-lib\json-lib\2.4\json-lib-2.4.jar;D:\Users\yuge.ly\.m2\repository\commons-beanutils\commons-beanutils\1.8.0\commons-beanutils-1.8.0.jar;D:\Users\yuge.ly\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;D:\Users\yuge.ly\.m2\repository\commons-lang\commons-lang\2.5\commons-lang-2.5.jar;D:\Users\yuge.ly\.m2\repository\net\sf\ezmorph\ezmorph\1.0.6\ezmorph-1.0.6.jar;D:\Users\yuge.ly\.m2\repository\javax\mail\mail\1.4.7\mail-1.4.7.jar;D:\Users\yuge.ly\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\yuge.ly"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="user.name" value="yuge.ly"/>
+    <property name="java.class.path" value="D:\work\CattleTest\target\test-classes;D:\work\CattleTest\target\classes;D:\Users\yuge.ly\.m2\repository\mysql\mysql-connector-java\6.0.6\mysql-connector-java-6.0.6.jar;D:\work\CattleTest\lib\testng-6.8.jar;D:\Users\yuge.ly\.m2\repository\org\slf4j\slf4j-api\1.6.6\slf4j-api-1.6.6.jar;D:\Users\yuge.ly\.m2\repository\org\slf4j\slf4j-log4j12\1.6.6\slf4j-log4j12-1.6.6.jar;D:\Users\yuge.ly\.m2\repository\log4j\log4j\1.2.16\log4j-1.2.16.jar;D:\Users\yuge.ly\.m2\repository\com\jayway\jsonpath\json-path-assert\2.2.0\json-path-assert-2.2.0.jar;D:\Users\yuge.ly\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;D:\Users\yuge.ly\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;D:\Users\yuge.ly\.m2\repository\com\jayway\jsonpath\json-path\2.2.0\json-path-2.2.0.jar;D:\Users\yuge.ly\.m2\repository\net\minidev\json-smart\2.2.1\json-smart-2.2.1.jar;D:\Users\yuge.ly\.m2\repository\net\minidev\accessors-smart\1.1\accessors-smart-1.1.jar;D:\Users\yuge.ly\.m2\repository\org\ow2\asm\asm\5.0.3\asm-5.0.3.jar;D:\Users\yuge.ly\.m2\repository\org\apache\httpcomponents\httpmime\4.5\httpmime-4.5.jar;D:\Users\yuge.ly\.m2\repository\org\apache\httpcomponents\httpclient\4.5\httpclient-4.5.jar;D:\Users\yuge.ly\.m2\repository\org\apache\httpcomponents\httpcore\4.4.6\httpcore-4.4.6.jar;D:\Users\yuge.ly\.m2\repository\org\apache\httpcomponents\httpclient-cache\4.5\httpclient-cache-4.5.jar;D:\Users\yuge.ly\.m2\repository\commons-codec\commons-codec\1.4\commons-codec-1.4.jar;D:\Users\yuge.ly\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar;D:\Users\yuge.ly\.m2\repository\commons-httpclient\commons-httpclient\3.0.1\commons-httpclient-3.0.1.jar;D:\Users\yuge.ly\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;D:\Users\yuge.ly\.m2\repository\net\sourceforge\jexcelapi\jxl\2.6.12\jxl-2.6.12.jar;D:\Users\yuge.ly\.m2\repository\net\sf\json-lib\json-lib\2.4\json-lib-2.4.jar;D:\Users\yuge.ly\.m2\repository\commons-beanutils\commons-beanutils\1.8.0\commons-beanutils-1.8.0.jar;D:\Users\yuge.ly\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;D:\Users\yuge.ly\.m2\repository\commons-lang\commons-lang\2.5\commons-lang-2.5.jar;D:\Users\yuge.ly\.m2\repository\net\sf\ezmorph\ezmorph\1.0.6\ezmorph-1.0.6.jar;D:\Users\yuge.ly\.m2\repository\javax\mail\mail\1.4.7\mail-1.4.7.jar;D:\Users\yuge.ly\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_111\jre"/>
+    <property name="sun.java.command" value="D:\work\CattleTest\target\surefire\surefirebooter8615870390459153827.jar D:\work\CattleTest\target\surefire\surefire2838234963358832101tmp D:\work\CattleTest\target\surefire\surefire3137846383011839961tmp"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_111"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext;C:\windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_111\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_111\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="localRepository" value="D:\Users\yuge.ly\.m2\repository"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="ControlCenter.EntryDoor" name="Main" time="5.566"/>
+</testsuite>

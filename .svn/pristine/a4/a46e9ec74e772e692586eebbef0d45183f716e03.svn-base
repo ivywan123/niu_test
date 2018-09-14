@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="ControlCenter" duration-ms="5583" started-at="2017-04-01T16:03:28Z" finished-at="2017-04-01T16:03:34Z">
+    <groups>
+    </groups>
+    <test name="ControlCenter" duration-ms="5583" started-at="2017-04-01T16:03:28Z" finished-at="2017-04-01T16:03:34Z">
+      <class name="ControlCenter.EntryDoor">
+        <test-method status="PASS" signature="Main()[pri:0, instance:ControlCenter.EntryDoor@6ea12c19]" name="Main" duration-ms="5566" started-at="2017-04-02T00:03:28Z" finished-at="2017-04-02T00:03:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Main -->
+      </class> <!-- ControlCenter.EntryDoor -->
+    </test> <!-- ControlCenter -->
+  </suite> <!-- ControlCenter -->
+</testng-results>

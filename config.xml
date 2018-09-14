@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="gbk"?>
+<config>   
+
+  <!-- 数据库配置-->
+  <DataBase>100.81.165.87:3345</DataBase>
+  <DataBaseName>Demose_uic</DataBaseName>
+  <UserName>Tesla_uic</UserName>
+  <Passwd>YNmlmBIzC8k88TjIr2K1</Passwd>
+
+<!-- 报告接收多个邮箱以“,”隔开-->
+<mail>363701080@qq.com</mail>
+
+<!--  指定Case等级Run  --> 	
+ <Level>P0,P1,P2,P3,P4</Level>
+
+  <!--  工作目录  -->
+ <path>D:\TestSpace\</path>
+
+  <!--  用例文件路径配置-->
+<Templatepath>D:\TestSpace\Template\</Templatepath>
+<Template>demo.xls</Template>
+
+</config>

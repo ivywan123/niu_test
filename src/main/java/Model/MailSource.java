@@ -1,0 +1,52 @@
+package Model;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+/**
+ *
+ */
+public class MailSource {
+
+
+    public String   Environmental ;
+    public String   URL;
+    private String TRTittle;
+    private String TRText;
+    public Map<String, ArrayList<Object>> mapter	= new LinkedHashMap<String, ArrayList<Object>>();
+
+    public String getEnvironmental() {
+        return Environmental;
+    }
+    public void setEnvironmental(String environmental) {
+        Environmental = environmental;
+    }
+    public String getURL() {
+        return URL;
+    }
+    public void setURL(String uRL) {
+        URL = uRL;
+    }
+    public  Map<String, ArrayList<Object>> getMapter() {
+        return mapter;
+    }
+    public  void setMapter(String key,ArrayList<Object> value) {
+        mapter.put(key, value);
+    }
+    public String getTRTittle() {
+        return TRTittle;
+    }
+
+    public void setTRTittle(String Model) {
+        TRTittle = "<td width=148 nowrap style='width:88.9pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:18.95pt'><p class=MsoNormal><span style='font-size:11.0pt;color:black'>"+Model+"<span lang=EN-US><o:p></o:p></span></span></p></td>";
+    }
+
+    public String getTRText() {
+        return TRText;
+    }
+
+    public void setTRText(Object object) {
+        TRText = "<td width=262 nowrap style='width:157.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; background:white;padding:0cm 5.4pt 0cm 5.4pt;height:18.95pt'><p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;font-family:\"Arial\",\"sans-serif\";color:black'>"+object+"<o:p></o:p></span></p></td>";
+    }
+}

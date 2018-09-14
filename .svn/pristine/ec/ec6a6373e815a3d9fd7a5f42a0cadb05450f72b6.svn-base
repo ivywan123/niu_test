@@ -1,0 +1,140 @@
+package Common;
+
+import Configuration.ReadConfig;
+import Model.*;
+
+import javax.mail.MessagingException;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ * Created by testly on 2017/3/8.
+ */
+public class Action {
+
+public static  String path=ReadConfig.readconfig("path");//定义你的工作存储地址
+
+
+
+    /**
+     * 替换模板数据触发邮件请求
+     * @param config
+     * @param task
+     * @throws IOException
+     * @throws MessagingException
+     */
+    public  void Result(ConfigVO config, TaskVO task) throws IOException, MessagingException {
+        String	mailValue	= Public.html( path+"mail/mail.txt" );//把模板数据读取出来
+        LinkedHashMap<String, String> map =config.getMap(); //替换模板数据
+        for ( String key : map.keySet() ){
+            if ( mailValue.contains( key.toString() ) ){
+                String value =new  String();
+                if(map.get( key )!=null) {
+                    value = map.get(key).toString();
+                }
+                mailValue = mailValue.replaceAll( key, value );
+            }
+        }
+        Map<String, ModuleVO> mapter	= config.getTable();
+        StringBuffer MailStr =new StringBuffer();
+        for(String key:mapter.keySet()){
+            MailStr.append("<tr style='mso-yfti-irow:1;height:18.95pt'>");
+            MailSource MD= new  MailSource();
+            MD.setTRTittle(key);
+            MailStr.append(MD.getTRTittle());
+            MD.setTRText(mapter.get(key).getSum());
+            MailStr.append(MD.getTRText());
+            MD.setTRText(mapter.get(key).getPassRate());
+            MailStr.append(MD.getTRText());
+            MD.setTRText(mapter.get(key).getPass());
+            MailStr.append(MD.getTRText());
+            MD.setTRText(mapter.get(key).getFail());
+            MailStr.append(MD.getTRText());
+            MD.setTRText(mapter.get(key).getDoTime());
+            MailStr.append(MD.getTRText());
+            MD.setTRText(time("dd  MM yyyy HH:mm:ss"));
+            MailStr.append(MD.getTRText());
+            MailStr.append("</tr>");
+        }
+        mailValue=mailValue.replaceAll("<tabsText>", MailStr.toString());
+        if(task.getFail()==0){
+            ReportMail.reportmail( mailValue,"【Pass】自动化框架邮件通知",config.getTomail());
+        }else{
+            ReportMail.reportmail( mailValue,"【File】自动化框架邮件通知",config.getTomail());
+
+        }
+    }
+
+    /**
+     * 生成html报告
+     * @param text
+     * @throws IOException
+     */
+    public  void ReportFile( String text) throws IOException {
+        try{
+            File file = new File( Action.path+"report"+ File.separator +  time("yyyyMMddHHmss") + ".html" );
+            try {
+                Writer writer = new OutputStreamWriter( new FileOutputStream( file, true ), "UTF-8" );
+                writer.write( text );
+                writer.write( "\r\n" );
+                writer.close();
+            } catch ( UnsupportedEncodingException e ) {
+                e.printStackTrace();
+            } catch ( FileNotFoundException e ) {
+                e.printStackTrace();
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
+        }
+        catch ( Exception FileNotFoundException )
+        {
+        }
+    }
+
+    /**
+     * 获取当前时间
+     * 传入 yyyy:MM:dd:HH:mm:ss
+     * @param TimeFormat
+     * @return
+     */
+    public  String time(String TimeFormat) {
+        SimpleDateFormat df	= new SimpleDateFormat(TimeFormat  );
+        String	time	= df.format( new Date() );
+        return time;
+    }
+
+
+    /**
+     * 睡眠等待传参
+     * @return
+     */
+    public  static String sleep(String Url) throws InterruptedException {
+        if (Url.isEmpty()){
+            if(Url.contains(".")){
+                Url=Url.substring(0, Url.indexOf("."));
+            }}else{
+        }
+        Thread.sleep(Integer.parseInt(Url));
+        return  Message.Wait;
+    }
+
+
+
+    /**日志结果处理
+     * ReportMail
+
+     * @throws Exception
+     */
+    public static void HtmlStr(ConfigVO config, TaskVO Assignment, StringBuffer reportHtml, HtmlReport hreport) throws Exception {
+        Action action=new Action();
+        action.Result(config,Assignment);
+        String mailValue= Public.html(Action.path+"report/task.html");//把报告模板读出来
+        String newStr = mailValue.replace("<Templete>",reportHtml);
+
+        newStr=newStr.replace("<Tab>",hreport.getTab());
+        newStr=newStr.replace("<data>",hreport.getData("测试环境",Assignment.getPassRate(),Assignment.getFail(),Assignment.getRunTime(),Assignment.getPass(),"Sample","自动化测试Demo"));
+        action.ReportFile(newStr);
+    }
+
+}

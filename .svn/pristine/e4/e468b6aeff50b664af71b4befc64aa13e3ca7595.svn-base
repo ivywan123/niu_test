@@ -1,0 +1,50 @@
+package Inspection;
+
+import Common.Public;
+import Model.CaseVO;
+import Model.StepVO;
+import Parameter.ParametersFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import java.io.IOException;
+
+/**
+ * Created by testly on 2017/3/9.
+ */
+public class Inspectoscope {
+
+
+    public String Inspectoscope(CaseVO cs,StepVO step) throws IOException {
+        ParametersFactory Parameters =new  ParametersFactory();
+        String CheckStr[]=step.getCheckStr().split(",");
+        String response =step.getResponse();
+        Calculate calculate=new  Calculate();
+        for(int i=0;i<CheckStr.length;i++){
+          String CheckArrStr=Parameters.Extraction(CheckStr[i]);
+          if(calculate.calculate(CheckArrStr,response)==false){
+              Public.log("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
+              step.setCheckList("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
+              cs.setResult(false);
+              step.setResult(false);
+          }else{
+              Public.log("【Pass 校验成功】 步骤名：" + step.getName() + "检查点 : " + CheckArrStr);
+              step.setCheckList("【Pass 校验成功】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
+          }
+
+        }
+        return  null;
+    }
+
+
+
+    public String Inspectoscope(String  CheckStr) {
+        if(CheckStr.contains("=")){
+
+        }
+        return  null;
+    }
+
+
+}

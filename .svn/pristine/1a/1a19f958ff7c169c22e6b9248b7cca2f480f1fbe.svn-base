@@ -1,0 +1,8 @@
+package Common;
+
+/**
+ * Created by testly on 2017/3/30.
+ */
+public class Message {
+    public static String Wait="{\"state\":200,\"message\":\"等待睡眠步骤\"}";
+}
