@@ -17,7 +17,7 @@ public class ReportMail {
 	public static void main( String[] args ) throws IOException, MessagingException{
 		String mailValue=Public.html("mail.txt");
 		String newStr = new String(mailValue.getBytes(), "utf-8");  
-	    ReportMail.reportmail(newStr, "test","ivy363701080@163.com");
+	    ReportMail.reportmail(newStr, "test","wanwan_test@163.com");
 	}
 
 	/**
@@ -38,8 +38,8 @@ public class ReportMail {
           props.put("mail.smtp.port", "465");
           props.put("mail.smtp.socketFactory.port", "465");
           props.put("mail.smtp.auth", "true");
-          props.put("mail.user", "ivy363701080@163.com");
-          props.put("mail.password", "wan1129qin");
+          props.put("mail.user", "wanwan_test@163.com");
+          props.put("mail.password", "a888888");
           Authenticator authenticator = new Authenticator() {
               @Override
               protected PasswordAuthentication getPasswordAuthentication() {
