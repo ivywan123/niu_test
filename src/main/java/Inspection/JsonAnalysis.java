@@ -21,7 +21,7 @@ public class JsonAnalysis {
 		String expression10="$..book[-2:]";//获取最后两本书
 		String expression7="$.store.book[0].title";//获取第一本书的书名
 		String expression8="$.store.bicycle.color";//获取自动车的颜色
-		String expression9="$.store.book[*].author";//获取所有的书本作者
+		String expression9="$.store.book[*].author";//获取所有的书本作者wam
 
 		logger.info("info1:"+json.JsonPath(jsonStr,expression1));
 		logger.info("info2:"+json.JsonPath(jsonStr,expression2));
