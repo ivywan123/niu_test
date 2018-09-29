@@ -13,6 +13,7 @@ public class StepVO extends CaseVO {
     private String method;
     private String Url;
     private String parameter;
+    private String extra_parameter;//维护替换后的参数，用于传递变量
     private String Level;
     private String CheckStr;
     private String transfer;
@@ -90,8 +91,18 @@ public class StepVO extends CaseVO {
     }
 
     public void setResponse(String response) throws IOException {
-        Public.logs("response:" );
-        System.out.println(response);
+        Public.logs("response:" + response );
+        Public.log("response:" + response );
+//        System.out.println(response);
         this.response = response;
     }
+
+    public String getExtra_parameter() {
+        return extra_parameter;
+    }
+
+    public void setExtra_parameter(String extra_parameter) {
+        this.extra_parameter = extra_parameter;
+    }
+
 }

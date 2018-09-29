@@ -1,11 +1,11 @@
 package Common;
 import Configuration.ReadConfig;
+import com.mysql.cj.core.util.StringUtils;
+import net.sf.json.JSONObject;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,14 +15,15 @@ public class SqlConnection  {
     public static  String tableName= ReadConfig.readconfig("DataBaseName");//定义你的工作存储地址
     public static  String user= ReadConfig.readconfig("UserName");//定义你的工作存储地址
     public static  String pwd= ReadConfig.readconfig("Passwd");//定义你的工作存储地址
-    public static  String url= "jdbc:mysql://"+Ip+":3306/"+tableName;
+    public static  String url= "jdbc:mysql://"+Ip+":3306/"+tableName+"?autoReconnect=true";
 
 /**
      * 查询
      * @param sql
      */
- public  void Select(String sql) {
-    Connection conn = null;
+ public  String Select(String sql) {
+     List<String> result = new ArrayList<String>();
+     Connection conn = null;
     Statement st = null;
     ResultSet rs = null;
     try {
@@ -30,9 +31,13 @@ public class SqlConnection  {
         conn = DriverManager.getConnection(url,user,pwd);
         st = conn.createStatement();
         rs = st.executeQuery(sql);
+        ResultSetMetaData rm = rs.getMetaData();
         while(rs.next()) {
-            System.out.println(rs.getObject(1) + "  " +
-                    rs.getObject(2) + "  " + rs.getInt("birth"));
+            JSONObject json_obj = new JSONObject();
+            for (int i=1; i<=rm.getColumnCount(); i++){
+                json_obj.put(rm.getColumnLabel(i), rs.getString(i));
+            }
+            result.add(json_obj.toString());
         }
         //分别捕获异常
     } catch (ClassNotFoundException e) {
@@ -59,6 +64,8 @@ public class SqlConnection  {
             e.printStackTrace();
         }
     }
+//     System.out.println(String.join(",",result));
+    return String.join(",",result);
 }
 
     /**

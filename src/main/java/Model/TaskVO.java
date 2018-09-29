@@ -1,6 +1,7 @@
 package Model;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -28,9 +29,9 @@ public class TaskVO {
         config.setMap("passinfo",String.valueOf(PassRate));
         config.setMap("caseskip",String.valueOf(Skip));
         config.setMap("Environment", "日常环境");
-        config.setMap("Urlinfo","http://www.baidu.com" );
+        config.setMap("Urlinfo","www.baidu.com" );
         config.setMap("Taltime", runTime);
-        config.setMap("<planName>", "自动化测试任务展示");
+        config.setMap("<planName>", "自动化测试-日常测试");
     }
 
     public String getRunTime() {

@@ -99,7 +99,8 @@ public class Public {
         if (str!=null) {
             Pattern p = Pattern.compile("\\s*|\t|\r|\n");
             Matcher m = p.matcher(str);
-            dest = m.replaceAll("");
+//            dest = m.replaceAll("");
+            dest = str;
         }
         return dest;
     }
@@ -116,9 +117,26 @@ public class Public {
     }
 
     /**
-     * 普标题打印 **/
+     * 普标题打印
+     * 输出log日志
+     * **/
     public static  void log( String log) throws IOException{
         System.out.println(log);
+        try {
+            File file = new File( Action.path+"Log" + File.separator + new Action().time("yyyyMMddHHmss")  + ".txt" );
+            PrintWriter writer = null;
+            FileWriter fileWrite = new FileWriter(file, true);
+            writer = new PrintWriter(fileWrite);
+            writer.append("\n");
+            writer.append(System.getProperty("line.separator")
+                    + new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
+                    .format(new Date()) + "__" );
+            writer.append(log);
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static  void main( String []args) throws IOException{

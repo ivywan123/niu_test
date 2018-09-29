@@ -73,10 +73,11 @@ public class ConfigVO {
     }
 
     public String getEnvironment() {
+        setEnvironment();
         return Environment;
     }
 
-    public void setEnvironment(String environment) {
-        Environment = environment;
+    public void setEnvironment() {
+        Environment = ReadConfig.readconfig("environment");
     }
 }

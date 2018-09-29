@@ -53,7 +53,7 @@ public static  String path=ReadConfig.readconfig("path");//定义你的工作存
             MailStr.append(MD.getTRText());
             MD.setTRText(mapter.get(key).getDoTime());
             MailStr.append(MD.getTRText());
-            MD.setTRText(time("dd  MM yyyy HH:mm:ss"));
+            MD.setTRText(time("yyyy-MM-dd HH:mm:ss"));
             MailStr.append(MD.getTRText());
             MailStr.append("</tr>");
         }
@@ -133,7 +133,7 @@ public static  String path=ReadConfig.readconfig("path");//定义你的工作存
         String newStr = mailValue.replace("<Templete>",reportHtml);
 
         newStr=newStr.replace("<Tab>",hreport.getTab());
-        newStr=newStr.replace("<data>",hreport.getData("测试环境",Assignment.getPassRate(),Assignment.getFail(),Assignment.getRunTime(),Assignment.getPass(),"Sample","自动化测试Demo"));
+        newStr=newStr.replace("<data>",hreport.getData("测试环境",Assignment.getPassRate(),Assignment.getFail(),Assignment.getRunTime(),Assignment.getPass(),"Tester","自动化测试"));
         action.ReportFile(newStr);
     }
 

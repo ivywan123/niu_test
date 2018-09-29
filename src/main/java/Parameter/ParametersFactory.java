@@ -4,6 +4,7 @@ package Parameter;
 import Common.Public;
 import Inspection.JsonAnalysis;
 import Model.StepVO;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
@@ -25,6 +26,7 @@ private String VarList[];
     public  static void   GetParameter(StepVO step) throws IOException {
         String response=step.getResponse();
         String Parameter=step.getTransfer();
+        String extra_parameter = step.getExtra_parameter(); //替换后的参数
         if(Parameter!=null){
             String ParameterList[]=Parameter.split(",");
             for(int ium=0;ium<ParameterList.length;ium++){
@@ -33,10 +35,23 @@ private String VarList[];
                     JsonAnalysis jpath=new JsonAnalysis();
                     String key =Pstr.substring(0,Pstr.indexOf("="));
                     String value=Pstr.substring(Pstr.indexOf("=")+1,Pstr.length());
-                    setDaoMap(key,jpath.JsonPath(response,value));
+//                    JSONObject obj = JSONObject.fromObject(response);
+                    //判断response中是否有value值，如果有就从response中取值；如果没有，就从url中取名称相同的值
+                    String la=value.substring(2,value.length());
+                    if(response.contains(la)){
+                        setDaoMap(key,jpath.JsonPath(response,value));
+                    }else{
+                        //从替换后的参数中取值
+                        if(extra_parameter.contains(la)){
+                            String done=extra_parameter.substring(extra_parameter.indexOf(la)+la.length()+1,extra_parameter.indexOf("&"));
+                            setDaoMap(key,done);
+                        }
+                    }
+
                 }
             }
         }
+        Public.log("参数池: " + daoMap.toString());
         Public.logs("参数池: " + daoMap.toString());
     }
 
@@ -80,7 +95,7 @@ private String VarList[];
            }
 
        }
-        //替换当前时间
+        //替换当前时间VarTime()
         if(ArrStr.contains("VarTime")){
             if(ArrStr.contains("VarTime(")){
                String done=ArrStr.substring(ArrStr.indexOf("VarTime(")+8,ArrStr.indexOf(")"));
@@ -92,9 +107,9 @@ private String VarList[];
         }
 
         //替换随机字符串
-        if(ArrStr.contains("VarRondomStr(")){
-            if(ArrStr.contains("VarRondomStr(")){
-                String done=ArrStr.substring(ArrStr.indexOf("VarRondomStr(")+13,ArrStr.indexOf(")"));
+        if(ArrStr.contains("VarRandomStr(")){
+            if(ArrStr.contains("VarRandomStr(")){
+                String done=ArrStr.substring(ArrStr.indexOf("VarRandomStr(")+13,ArrStr.indexOf(")"));
                 ArrStr=ArrStr.replaceAll("VarRondomStr("+done+")",Global.RandomStr(done));
 
             }else{
@@ -115,18 +130,59 @@ private String VarList[];
 
 
         //替换随机数
-        if(ArrStr.contains("VarRondom")){
-            if(ArrStr.contains("VarRondom(")){
+        if(ArrStr.contains("VarRandom")){
+            if(ArrStr.contains("VarRandom(")){
                 String	VarRondom=new String();
-                VarRondom	= ArrStr.substring( ArrStr.indexOf( "VarRondom(" ), ArrStr.lastIndexOf( ")" ) ) + ")";
+                VarRondom	= ArrStr.substring( ArrStr.indexOf( "VarRandom(" ), ArrStr.lastIndexOf( ")" ) ) + ")";
                 String	inter= VarRondom.substring( VarRondom.indexOf( "(" ) + 1, VarRondom.lastIndexOf( ")" ) );
                 ArrStr=ArrStr.replaceAll("VarTime("+VarRondom+")",Global.Random(inter));
             }
         }
 
+        //替换随机手机号vartel() 1380000
+        if(ArrStr.contains("vartel()")){
+            System.out.println(Global.getTelephone());
+            ArrStr=ArrStr.replace("vartel()",Global.getTelephone());
+        }
+
+        //替换随机姓名
+        if(ArrStr.contains("realname()")){
+            ArrStr=ArrStr.replace("realname()",Global.getChineseName());
+        }
+
+        //替换随机身份证号
+        if(ArrStr.contains("idcard()")){
+            ArrStr=ArrStr.replace("idcard()",Global.getRandomidentitycard());
+        }
+
+        //替换随机银行卡号
+        if(ArrStr.contains("cardno()")){
+            ArrStr=ArrStr.replace("cardno()",Global.getCardNO(14));
+        }
+
+        /*
+        //替换环境变量
+        if(ArrStr.contains("Envr")){
+
+        }
+        */
+
         return ArrStr;
     }
+    public static void main(String[] args){
+        String str="VarTime(2017-8-10)";
+        if(str.contains("VarTime")){
+            if(str.contains("VarTime(")){
+                String done=str.substring(str.indexOf("VarTime(")+8,str.indexOf(")"));
+                System.out.println(done);
+                str=str.replaceAll("VarTime("+done+")",Global.Time(done));
 
+            }else{
+                str=str.replaceAll("VarTime",Global.Time(null));
+            }
+            System.out.println(str);
+        }
+        }
 
     }
 

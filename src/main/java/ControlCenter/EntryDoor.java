@@ -32,6 +32,7 @@ public  void Main() throws Exception {
     for(int i=0;i<Module.size();i++){
         long startModuleTime = System.currentTimeMillis();
         Public.logs("【模块名称】: "+Module.get(i).getName());
+        Public.log("【模块名称】: "+Module.get(i).getName());
         doIt.ResolveModule(config,Module.get(i));
         Assignment.TaskVO(Module.get(i).getPass(),Module.get(i).getFail(),Module.get(i));
         long overModuleTime = System.currentTimeMillis();
@@ -46,6 +47,7 @@ public  void Main() throws Exception {
     JSONObject JSON= new JSONObject();
     JSON.put("result",Assignment);
     Public.logs(JSON.toString());
+    Public.log(JSON.toString());
     Action.HtmlStr( config, Assignment, reportHtml, hreport);//结果数据处理
 
 }

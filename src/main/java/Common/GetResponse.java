@@ -19,7 +19,9 @@ public class GetResponse {
         String response=new String();
         String Url=Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
         String Parameter=Public.replaceStr(ParametersFactory.Extraction(step.getParameter()));
-        String Method = step.getMethod();
+        //保存替换后的参数
+        step.setExtra_parameter(Parameter);
+        String Method = step.getMethod().toUpperCase();
         httpclient send=new  httpclient();
         try{
         switch (Method) {
@@ -29,13 +31,17 @@ public class GetResponse {
             case "POST":
                 response=send.sendPost(Url,Parameter);
                 break;
-            case "Sql-select":
-                new  SqlConnection().Select(Url);
+            case "DELETE":
+                response=send.sendDelete(Url,Parameter);
                 break;
-            case "Sql-update":
+            case "SQL-SELECT":
+                SqlConnection st=new SqlConnection();
+                response = st.Select(Url);
+                break;
+            case "SQL-UPDATE":
                 new  SqlConnection().insert(Url);
                 break;
-            case "sleep":
+            case "SLEEP":
                 response = Action.sleep(Url);
                 break;
         }}catch (Exception e){

@@ -27,6 +27,7 @@ public class Implement {
             String caseName=CaseList.get(i).getName();
             String caseLevel=CaseList.get(i).getLevel();
             Public.log("【用例名称】:"+caseName+"\n【用例等级】:"+caseLevel);
+            Public.logs("【用例名称】:"+caseName+"\n【用例等级】:"+caseLevel);
             ResolveCase(config,CaseList.get(i));
             if(CaseList.get(i).getResult()){
                 module.setPass(1);
@@ -40,7 +41,7 @@ public class Implement {
      * @param config
      */
     public void ResolveCase(ConfigVO config, CaseVO cs) throws Exception {
-        String caseLevel=cs.getLevel();
+        String caseLevel=cs.getLevel().toUpperCase();
         ArrayList<StepVO> stepList= cs.getStepList();
         if(config.getRunLevel().contains(caseLevel)){//判断
             ResolveStep(cs,stepList);
@@ -63,6 +64,7 @@ public class Implement {
             Inspectoscope check=new Inspectoscope();
             String StepName=stepList.get(i).getName();
             Public.log("【步骤名称】:"+StepName);
+            Public.logs("【步骤名称】:"+StepName);
             stepList.get(i).setResponse(response.GetResponse(stepList.get(i)));
             check.Inspectoscope(cs, stepList.get(i));
             if(stepList.get(i).getTransfer()!=null){  //判断是否需要提取参数

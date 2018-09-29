@@ -2,10 +2,13 @@
 <config>   
 
   <!-- 数据库配置-->
-  <DataBase>100.81.165.87:3345</DataBase>
-  <DataBaseName>Demose_uic</DataBaseName>
-  <UserName>Tesla_uic</UserName>
-  <Passwd>YNmlmBIzC8k88TjIr2K1</Passwd>
+  <DataBase>192.168.1.70</DataBase>
+  <DataBaseName>new_platform</DataBaseName>
+  <UserName>root</UserName>
+  <Passwd>root</Passwd>
+
+<!--设置测试用例运行环境，为测试环境，准生产或生产-->
+<environment>http://192.168.1.74:7070</environment>
 
 <!-- 报告接收多个邮箱以“,”隔开-->
 <mail>363701080@qq.com</mail>
@@ -18,6 +21,6 @@
 
   <!--  用例文件路径配置-->
 <Templatepath>D:\TestSpace\Template\</Templatepath>
-<Template>demo.xls</Template>
+<Template>caiyun-new.xls</Template>
 
 </config>

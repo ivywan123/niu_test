@@ -25,11 +25,13 @@ public class Inspectoscope {
           String CheckArrStr=Parameters.Extraction(CheckStr[i]);
           if(calculate.calculate(CheckArrStr,response)==false){
               Public.log("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
+              Public.logs("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
               step.setCheckList("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
               cs.setResult(false);
               step.setResult(false);
           }else{
               Public.log("【Pass 校验成功】 步骤名：" + step.getName() + "检查点 : " + CheckArrStr);
+              Public.logs("【Pass 校验成功】 步骤名：" + step.getName() + "检查点 : " + CheckArrStr);
               step.setCheckList("【Pass 校验成功】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
           }
 

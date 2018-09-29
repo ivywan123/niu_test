@@ -7,6 +7,8 @@ import org.apache.http.client.CookieStore;
 
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 
@@ -29,6 +31,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -120,6 +123,44 @@ public  String  sendPost(String url,String parameter)  {
     }
     return Response;
 }
+    /**
+     * delete请求
+     *
+     */
+    public  String  sendDelete(String url,String parameter) {
+        String Response = new String();
+        HttpDeleteWithBody httpDelete = new HttpDeleteWithBody(url);
+        List<NameValuePair> formParams = new ArrayList<NameValuePair>();
+        FormatProcessing(formParams, parameter);
+        UrlEncodedFormEntity urlEncodedFormEntity;
+        try {
+            urlEncodedFormEntity = new UrlEncodedFormEntity(formParams, "UTF-8");
+            httpDelete.setEntity(urlEncodedFormEntity);
+            httpDelete.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            System.out.println("execurting request:" + httpDelete.getURI() + "\nparameter:" + parameter);
+            HttpResponse httpResponse = null;
+            httpResponse = httpclient.execute(httpDelete);
+            HttpEntity httpEntity = httpResponse.getEntity();
+            if (httpEntity != null) {
+                String content = EntityUtils.toString(httpEntity, "UTF-8");
+                Response = content;
+            }
+            printResponse(httpResponse);
+            setContext();
+            setCookieStore(httpResponse);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //关闭连接，释放资源
+            httpclient.getConnectionManager().shutdown();
+        }
+        return Response;
+    }
+
 
     /**
      * Post 入参转换成List
@@ -149,9 +190,12 @@ public  String  sendPost(String url,String parameter)  {
         HttpEntity entity = httpResponse.getEntity();
         System.out.println("status:" + httpResponse.getStatusLine());
         Public.logs("headers");
+        Public.log("headers");
         HeaderIterator iterator = httpResponse.headerIterator();
         while (iterator.hasNext()) {
-            System.out.println("\t" + iterator.next());
+//            System.out.println("\t" + iterator.next());
+            Public.logs("\t" + iterator.next());
+            Public.log("\t" + iterator.next());
         }
         if (entity != null) {
             try {
@@ -216,4 +260,20 @@ public  String  sendPost(String url,String parameter)  {
         System.out.println(api.sendPost(url,data));*/
     }
 
+}
+
+
+ class HttpDeleteWithBody extends HttpEntityEnclosingRequestBase {
+    public static final String METHOD_NAME = "DELETE";
+    public String getMethod() { return METHOD_NAME; }
+
+    public HttpDeleteWithBody(final String uri) {
+        super();
+        setURI(URI.create(uri));
+    }
+    public HttpDeleteWithBody(final URI uri) {
+        super();
+        setURI(uri);
+    }
+    public HttpDeleteWithBody() { super(); }
 }
