@@ -38,8 +38,8 @@ public class ReportMail {
           props.put("mail.smtp.port", "465");
           props.put("mail.smtp.socketFactory.port", "465");
           props.put("mail.smtp.auth", "true");
-          props.put("mail.user", "ivy363701080@163.com");
-          props.put("mail.password", "wan1129qin");
+          props.put("mail.user", "wanwan_test@163.com");
+          props.put("mail.password", "a888888");
           Authenticator authenticator = new Authenticator() {
               @Override
               protected PasswordAuthentication getPasswordAuthentication() {
