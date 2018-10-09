@@ -160,6 +160,10 @@ private String VarList[];
             ArrStr=ArrStr.replace("cardno()",Global.getCardNO(14));
         }
 
+        //获取当前日期
+        if(ArrStr.contains("curdate()")){
+            ArrStr=ArrStr.replace("vardate()",Global.getCurDate());
+        }
         /*
         //替换环境变量
         if(ArrStr.contains("Envr")){
@@ -170,7 +174,7 @@ private String VarList[];
         return ArrStr;
     }
     public static void main(String[] args){
-        String str="VarTime(2017-8-10)";
+        String str="VarTime(2017-8-10 09:30:28)";
         if(str.contains("VarTime")){
             if(str.contains("VarTime(")){
                 String done=str.substring(str.indexOf("VarTime(")+8,str.indexOf(")"));

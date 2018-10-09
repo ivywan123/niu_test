@@ -69,6 +69,16 @@ public class Global {
     }
 
     /**
+     * 获取当前日期
+     *
+     */
+    public static String getCurDate(){
+        SimpleDateFormat	df = new SimpleDateFormat("yyyy-MM-dd");
+        String curdate = df.format(new Date());
+        return curdate;
+    }
+
+    /**
      *
       * @param start
      * @param end

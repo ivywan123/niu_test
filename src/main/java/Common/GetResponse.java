@@ -1,5 +1,6 @@
 package Common;
 
+import Model.ConfigVO;
 import Model.StepVO;
 import Parameter.ParametersFactory;
 import Trigger.httpclient;
@@ -15,13 +16,19 @@ public class GetResponse {
      * @return
      * @throws Exception
      */
-    public  String GetResponse(StepVO step) throws Exception {
+    public  String GetResponse(ConfigVO config,StepVO step) throws Exception {
         String response=new String();
-        String Url=Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
+        String Url = new String();
+        //url的组装，将路径前半部分从配置文件中取
+        String Method = step.getMethod().toUpperCase();
+        if(( "POST".equals(Method) ) || "GET".equals(Method) || "DELETE".equals(Method)) {
+            Url = config.getEnvironment() + Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
+        }else {
+            Url = Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
+        }
         String Parameter=Public.replaceStr(ParametersFactory.Extraction(step.getParameter()));
         //保存替换后的参数
         step.setExtra_parameter(Parameter);
-        String Method = step.getMethod().toUpperCase();
         httpclient send=new  httpclient();
         try{
         switch (Method) {

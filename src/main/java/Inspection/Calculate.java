@@ -3,6 +3,8 @@ package Inspection;
 import Common.Public;
 import Parameter.ParametersFactory;
 
+import java.math.BigDecimal;
+
 /**
 *
 */
@@ -18,17 +20,32 @@ public Boolean calculate(String ArrStrA, String jsonStr) {
         if (ArrStrA.contains(">")||ArrStrA.contains("<")||ArrStrA.contains("=")||ArrStrA.contains(":")) {
 
         if (ArrStrA.contains(">")) {
-            String Arr = ArrStrA.substring(0, ArrStrA.indexOf(">"));
-            String Arr1 = ArrStrA.substring(ArrStrA.indexOf(">") + 1, ArrStrA.length());
+            if(ArrStrA.contains(">=")){
+                String Arr = ArrStrA.substring(0, ArrStrA.indexOf(">="));
+                String Arr1 = ArrStrA.substring(ArrStrA.indexOf(">=") + 1, ArrStrA.length());
 
-            double sortOne = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
-            double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());
-            System.out.println("sortOne:>"+sortOne+"  sortTne:"+sortTne);
+                double sortOne = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
+                double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());
+                System.out.println("sortOne:>=" + sortOne + "  sortTne:" + sortTne);
+                if (sortOne > sortTne || sortOne == sortTne) {
+                    ispassed = true;
+                } else {
+                    ispassed = false;
+                }
+            }
+            else {
+                String Arr = ArrStrA.substring(0, ArrStrA.indexOf(">"));
+                String Arr1 = ArrStrA.substring(ArrStrA.indexOf(">") + 1, ArrStrA.length());
 
-            if (sortOne > sortTne) {
-                ispassed = true;
-            } else {
-                ispassed = false;
+                double sortOne = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
+                double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());
+                System.out.println("sortOne:>" + sortOne + "  sortTne:" + sortTne);
+
+                if (sortOne > sortTne) {
+                    ispassed = true;
+                } else {
+                    ispassed = false;
+                }
             }
         }
 
@@ -101,7 +118,7 @@ public String StrGetLS(String ArrStrA, String JsonStr) throws Exception {
         try {
             String key1 = getvar(ArrStrA.substring(ArrStrA.lastIndexOf("+") + 1, ArrStrA.length()),JsonStr);
             String key2 = getvar(ArrStrA.substring(0, ArrStrA.lastIndexOf("+")),JsonStr);
-            boolString=  ArrStrA=String.valueOf(Long.parseLong(key1)+Long.parseLong(key2));
+            boolString=  ArrStrA=String.valueOf(new BigDecimal(key1).add(new BigDecimal(key2)));
         }catch(Exception e){
         }
 
@@ -110,7 +127,7 @@ public String StrGetLS(String ArrStrA, String JsonStr) throws Exception {
         try {
             String key1 = getvar(ArrStrA.substring(ArrStrA.lastIndexOf("-") + 1, ArrStrA.length()),JsonStr);
             String key2 = getvar(ArrStrA.substring(0, ArrStrA.lastIndexOf("-")),JsonStr);
-            boolString=ArrStrA=String.valueOf(Long.parseLong(key2)-Long.parseLong(key1));
+            boolString=ArrStrA=String.valueOf(new BigDecimal(key2).subtract(new BigDecimal(key1)));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -120,7 +137,7 @@ public String StrGetLS(String ArrStrA, String JsonStr) throws Exception {
         try {
             String key1 = getvar(ArrStrA.substring(ArrStrA.lastIndexOf("%") + 1, ArrStrA.length()),JsonStr);
             String key2 = getvar(ArrStrA.substring(0, ArrStrA.lastIndexOf("%")),JsonStr);
-            boolString=  ArrStrA=String.valueOf(Long.parseLong(key2)/Long.parseLong(key1));
+            boolString=  ArrStrA=String.valueOf(new BigDecimal(key2).divide(new BigDecimal(key1)));
         }catch(Exception e){
         }
 
@@ -129,7 +146,7 @@ public String StrGetLS(String ArrStrA, String JsonStr) throws Exception {
         try {
             String key1 = getvar(ArrStrA.substring(ArrStrA.lastIndexOf("*") + 1, ArrStrA.length()),JsonStr);
             String key2 = getvar(ArrStrA.substring(0, ArrStrA.lastIndexOf("*")),JsonStr);
-            boolString=ArrStrA=String.valueOf(Long.parseLong(key2)*Long.parseLong(key1));
+            boolString=ArrStrA=String.valueOf(new BigDecimal(key2).multiply(new BigDecimal(key1)));
         }catch(Exception e){
         }
     }

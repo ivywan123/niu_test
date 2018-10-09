@@ -193,9 +193,9 @@ public  String  sendPost(String url,String parameter)  {
         Public.log("headers");
         HeaderIterator iterator = httpResponse.headerIterator();
         while (iterator.hasNext()) {
-//            System.out.println("\t" + iterator.next());
-            Public.logs("\t" + iterator.next());
-            Public.log("\t" + iterator.next());
+            System.out.println("\t" + iterator.next());
+//            Public.logs("\t" + iterator.next());
+//            Public.log("\t" + iterator.next());
         }
         if (entity != null) {
             try {

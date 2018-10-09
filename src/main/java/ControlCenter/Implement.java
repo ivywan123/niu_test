@@ -44,7 +44,7 @@ public class Implement {
         String caseLevel=cs.getLevel().toUpperCase();
         ArrayList<StepVO> stepList= cs.getStepList();
         if(config.getRunLevel().contains(caseLevel)){//判断
-            ResolveStep(cs,stepList);
+            ResolveStep(config,cs,stepList);
             cs.setStepCount(stepList.size());
         }
 
@@ -57,7 +57,7 @@ public class Implement {
      * @param stepList
      * @throws Exception
      */
-    public void ResolveStep(CaseVO cs, ArrayList<StepVO> stepList) throws Exception {
+    public void ResolveStep(ConfigVO config,CaseVO cs, ArrayList<StepVO> stepList) throws Exception {
 
         for(int i=0;i<stepList.size();i++){
             GetResponse response=new GetResponse();
@@ -65,12 +65,12 @@ public class Implement {
             String StepName=stepList.get(i).getName();
             Public.log("【步骤名称】:"+StepName);
             Public.logs("【步骤名称】:"+StepName);
-            stepList.get(i).setResponse(response.GetResponse(stepList.get(i)));
-            check.Inspectoscope(cs, stepList.get(i));
+            stepList.get(i).setResponse(response.GetResponse(config,stepList.get(i)));
+            //取参数和做断言换执行顺序，有些接口的断言要根据从data中取到的参数做计算
             if(stepList.get(i).getTransfer()!=null){  //判断是否需要提取参数
                 ParametersFactory.GetParameter(stepList.get(i));
             }
-
+            check.Inspectoscope(cs, stepList.get(i));
         }
     }
 
