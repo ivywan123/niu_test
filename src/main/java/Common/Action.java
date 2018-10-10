@@ -61,7 +61,7 @@ public static  String path=ReadConfig.readconfig("path");//定义你的工作存
         if(task.getFail()==0){
             ReportMail.reportmail( mailValue,"【Pass】自动化框架邮件通知",config.getTomail());
         }else{
-            ReportMail.reportmail( mailValue,"【File】自动化框架邮件通知",config.getTomail());
+            ReportMail.reportmail( mailValue,"【Fail】自动化框架邮件通知",config.getTomail());
 
         }
     }

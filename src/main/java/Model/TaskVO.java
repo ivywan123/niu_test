@@ -28,10 +28,10 @@ public class TaskVO {
         config.setMap("caseerror",String.valueOf(Fail));
         config.setMap("passinfo",String.valueOf(PassRate));
         config.setMap("caseskip",String.valueOf(Skip));
-        config.setMap("Environment", "日常环境");
+        config.setMap("Environment", config.getEnvironment());
         config.setMap("Urlinfo","www.baidu.com" );
         config.setMap("Taltime", runTime);
-        config.setMap("<planName>", "自动化测试-日常测试");
+        config.setMap("<planName>", "自动化测试"+config.getEnvironment());
     }
 
     public String getRunTime() {

@@ -36,16 +36,14 @@ private String VarList[];
                     String key =Pstr.substring(0,Pstr.indexOf("="));
                     String value=Pstr.substring(Pstr.indexOf("=")+1,Pstr.length());
 //                    JSONObject obj = JSONObject.fromObject(response);
-                    //判断response中是否有value值，如果有就从response中取值；如果没有，就从url中取名称相同的值
+                    //判断替换后的参数中是否有value值，如果没有，就从response中取值
                     String la=value.substring(2,value.length());
-                    if(response.contains(la)){
-                        setDaoMap(key,jpath.JsonPath(response,value));
-                    }else{
+                    if(extra_parameter.contains(la)){
                         //从替换后的参数中取值
-                        if(extra_parameter.contains(la)){
-                            String done=extra_parameter.substring(extra_parameter.indexOf(la)+la.length()+1,extra_parameter.indexOf("&"));
-                            setDaoMap(key,done);
-                        }
+                        String done=extra_parameter.substring(extra_parameter.indexOf(la)+la.length()+1,extra_parameter.indexOf("&"));
+                        setDaoMap(key,done);
+                    }else{
+                        setDaoMap(key,jpath.JsonPath(response,value));
                     }
 
                 }

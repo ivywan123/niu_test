@@ -63,6 +63,7 @@ public class Implement {
             GetResponse response=new GetResponse();
             Inspectoscope check=new Inspectoscope();
             String StepName=stepList.get(i).getName();
+            System.out.println(stepList.get(i).getUrl());
             Public.log("【步骤名称】:"+StepName);
             Public.logs("【步骤名称】:"+StepName);
             stepList.get(i).setResponse(response.GetResponse(config,stepList.get(i)));

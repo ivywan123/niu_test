@@ -22,7 +22,7 @@ public Boolean calculate(String ArrStrA, String jsonStr) {
         if (ArrStrA.contains(">")) {
             if(ArrStrA.contains(">=")){
                 String Arr = ArrStrA.substring(0, ArrStrA.indexOf(">="));
-                String Arr1 = ArrStrA.substring(ArrStrA.indexOf(">=") + 1, ArrStrA.length());
+                String Arr1 = ArrStrA.substring(ArrStrA.indexOf(">=") + 2, ArrStrA.length());
 
                 double sortOne = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
                 double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());

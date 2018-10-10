@@ -22,6 +22,7 @@ public class GetResponse {
         //url的组装，将路径前半部分从配置文件中取
         String Method = step.getMethod().toUpperCase();
         if(( "POST".equals(Method) ) || "GET".equals(Method) || "DELETE".equals(Method)) {
+            System.out.println(step.getUrl());
             Url = config.getEnvironment() + Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
         }else {
             Url = Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
