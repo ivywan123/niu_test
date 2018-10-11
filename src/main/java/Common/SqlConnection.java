@@ -1,6 +1,6 @@
 package Common;
 import Configuration.ReadConfig;
-import com.mysql.cj.core.util.StringUtils;
+import Model.DataBaseVO;
 import net.sf.json.JSONObject;
 
 import java.sql.*;
@@ -11,25 +11,78 @@ import java.util.List;
  *
  */
 public class SqlConnection  {
-    public static  String Ip= ReadConfig.readconfig("DataBase");//定义你的工作存储地址
-    public static  String tableName= ReadConfig.readconfig("DataBaseName");//定义你的工作存储地址
-    public static  String user= ReadConfig.readconfig("UserName");//定义你的工作存储地址
-    public static  String pwd= ReadConfig.readconfig("Passwd");//定义你的工作存储地址
-    public static  String url= "jdbc:mysql://"+Ip+":3306/"+tableName+"?autoReconnect=true";
+    private static ArrayList<DataBaseVO> databaselist = new ArrayList<>() ;
+    //    public static  String Ip= ReadConfig.readconfig("DataBase");//DataBase
+//    public static  String tableName= ReadConfig.readconfig("DataBaseName");//DataBaseName
+//    public static  String user= ReadConfig.readconfig("UserName");//UserName
+//    public static  String pwd= ReadConfig.readconfig("Passwd");//Passwd
+//    public static  String url= "jdbc:mysql://"+Ip+":3306/"+tableName+"?autoReconnect=true";
+//    private ArrayList<DataBaseVO> databaselist = new ArrayList<>() ;
+    /**
+     * 装在数据库信息
+     */
+    public static void loaddatabase(){
+//        ArrayList<DataBaseVO> dblist = new ArrayList<>() ;
+        //固定最多只能有两个数据库
+        for(int i=1;i<3;i++){
+            try {
+                DataBaseVO dbo = new DataBaseVO();
+                String database = ReadConfig.readconfig("DataBase"+i);
+                if (database!=""|| database!=null) {
+                    dbo.setDataBase(database);
+                    dbo.setDataBaseName(ReadConfig.readconfig("DataBaseName"+i));
+                    dbo.setUserName(ReadConfig.readconfig("UserName"+i));
+                    dbo.setPasswd(ReadConfig.readconfig("Passwd"+i));
+                    dbo.setUrl();
+                    databaselist.add(dbo);
+                }else{
 
-/**
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    /**
+     * 获取数据库连接实例
+     *
+     */
+    public static Connection getconnect(String databaseName) throws Exception{
+        loaddatabase();
+        Connection conn = null;
+        //循环遍历list，查找到对应的数据库，做连接
+        for(int j=0;j<databaselist.size();j++){
+            if(databaseName.equals(databaselist.get(j).getDataBaseName())){
+                String url = databaselist.get(j).getUrl();
+                String user = databaselist.get(j).getUserName();
+                String pwd = databaselist.get(j).getPasswd();
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    conn = DriverManager.getConnection(url, user, pwd);
+                }catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return conn;
+    }
+
+    /**
      * 查询
      * @param sql
      */
- public  String Select(String sql) {
+ public  String Select(String databaseName,String sql) {
      List<String> result = new ArrayList<String>();
-     Connection conn = null;
+     Connection conn2 = null;
     Statement st = null;
     ResultSet rs = null;
     try {
-        Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection(url,user,pwd);
-        st = conn.createStatement();
+//        Class.forName("com.mysql.jdbc.Driver");
+//        conn = DriverManager.getConnection(url,user,pwd);
+        conn2 = getconnect(databaseName);
+        st = conn2.createStatement();
         rs = st.executeQuery(sql);
         ResultSetMetaData rm = rs.getMetaData();
         while(rs.next()) {
@@ -40,11 +93,9 @@ public class SqlConnection  {
             result.add(json_obj.toString());
         }
         //分别捕获异常
-    } catch (ClassNotFoundException e) {
+    } catch (Exception e) {
         e.printStackTrace();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
+    }  finally {
         try {
             //判断资源是否存在
             if(rs != null) {
@@ -56,9 +107,9 @@ public class SqlConnection  {
                 st.close();
                 st = null;
             }
-            if(conn != null) {
-                conn.close();
-                conn = null;
+            if(conn2 != null) {
+                conn2.close();
+                conn2 = null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,20 +123,19 @@ public class SqlConnection  {
      * 插入修改 删除
      * @param sql
      */
-    public  void insert (String sql) {
+    public  void insert (String databaseName,String sql) {
         System.out.println( sql);
-        Connection conn = null;
+        Connection conn3 = null;
         Statement st = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(url,user,pwd);
-            st = conn.createStatement();
+//            Class.forName("com.mysql.jdbc.Driver");
+//            conn = DriverManager.getConnection(url,user,pwd);
+            conn3 = getconnect(databaseName);
+            st = conn3.createStatement();
             //注意，此处是excuteUpdate()方法执行
             st.executeUpdate(sql);
             //分别捕获异常
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
@@ -93,9 +143,9 @@ public class SqlConnection  {
                     st.close();
                     st = null;
                 }
-                if(conn != null) {
-                    conn.close();
-                    conn = null;
+                if(conn3 != null) {
+                    conn3.close();
+                    conn3 = null;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
