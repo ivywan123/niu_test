@@ -17,15 +17,21 @@ public class GetResponse {
      * @throws Exception
      */
     public  String GetResponse(ConfigVO config,StepVO step) throws Exception {
-        String response=new String();
-        String Url = new String();
+        String response="";
+        String Url = "";
+        String dbName="";
+        String sql_url="";
         //url的组装，将路径前半部分从配置文件中取
         String Method = step.getMethod().toUpperCase();
         if(( "POST".equals(Method) ) || "GET".equals(Method) || "DELETE".equals(Method)) {
-            System.out.println(step.getUrl());
             Url = config.getEnvironment() + Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
-        }else {
+        } else if(( "SQL-SELECT".equals(Method) ) || "SQL-UPDATE".equals(Method)){
+            //如果需要查询数据库，Url要做切割，以冒号分割
             Url = Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
+            if(Url.contains(":")){
+                dbName = Url.substring(0,Url.indexOf(":"));
+                sql_url = Url.substring(Url.indexOf(":")+1,Url.length());
+            }
         }
         String Parameter=Public.replaceStr(ParametersFactory.Extraction(step.getParameter()));
         //保存替换后的参数
@@ -44,10 +50,10 @@ public class GetResponse {
                 break;
             case "SQL-SELECT":
                 SqlConnection st=new SqlConnection();
-                response = st.Select(Url);
+                response = st.Select(dbName,sql_url);
                 break;
             case "SQL-UPDATE":
-                new  SqlConnection().insert(Url);
+                new  SqlConnection().insert(dbName,sql_url);
                 break;
             case "SLEEP":
                 response = Action.sleep(Url);
