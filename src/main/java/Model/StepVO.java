@@ -91,9 +91,7 @@ public class StepVO extends CaseVO {
     }
 
     public void setResponse(String response) throws IOException {
-        Public.logs("response:" + response );
-        Public.log("response:" + response );
-//        System.out.println(response);
+//        Public.log("response:" + response );
         this.response = response;
     }
 

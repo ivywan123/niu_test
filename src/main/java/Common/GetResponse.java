@@ -29,8 +29,8 @@ public class GetResponse {
             //如果需要查询数据库，Url要做切割，以冒号分割
             Url = Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
             if(Url.contains(":")){
-                dbName = Url.substring(0,Url.indexOf(":"));
-                sql_url = Url.substring(Url.indexOf(":")+1,Url.length());
+                dbName = Public.replaceStr(Url.substring(0,Url.indexOf(":")));
+                sql_url = Public.replaceStr(Url.substring(Url.indexOf(":")+1,Url.length()));
             }
         }
         String Parameter=Public.replaceStr(ParametersFactory.Extraction(step.getParameter()));

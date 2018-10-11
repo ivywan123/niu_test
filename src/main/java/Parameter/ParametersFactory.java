@@ -50,7 +50,7 @@ private String VarList[];
             }
         }
         Public.log("参数池: " + daoMap.toString());
-        Public.logs("参数池: " + daoMap.toString());
+//        Public.logs("参数池: " + daoMap.toString());
     }
 
 

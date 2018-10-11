@@ -97,9 +97,11 @@ public class Public {
     public static String replaceStr(String str) {
         String dest = "";
         if (str!=null) {
+//            str=str.trim();  //去掉左右两边的空格
             Pattern p = Pattern.compile("\\s*|\t|\r|\n");
-            Matcher m = p.matcher(str);
-//            dest = m.replaceAll("");
+            Matcher m = p.matcher(str.trim());
+//            dest = m.replaceAll("");  //sql中有很多空格，不能去掉所有的空格
+
             dest = str;
         }
         return dest;
@@ -110,7 +112,7 @@ public class Public {
      * @param log
      * @throws IOException
      */
-    public static  void logs( String log) throws IOException{
+    public static  void logLayout( String log) throws IOException{
         System.out.println("==========================================================");
         System.out.println(new Action().time("[yyyy-MM-dd HH:mm:ss]-| ")+log);
         System.out.println("==========================================================");

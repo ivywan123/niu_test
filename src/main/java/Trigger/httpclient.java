@@ -189,14 +189,10 @@ public  String  sendPost(String url,String parameter)  {
     public static void printResponse(HttpResponse httpResponse) throws ParseException, IOException {
         HttpEntity entity = httpResponse.getEntity();
         System.out.println("status:" + httpResponse.getStatusLine());
-        Public.logs("headers");
-        Public.log("headers");
         HeaderIterator iterator = httpResponse.headerIterator();
-        while (iterator.hasNext()) {
-            System.out.println("\t" + iterator.next());
-//            Public.logs("\t" + iterator.next());
-//            Public.log("\t" + iterator.next());
-        }
+//        while (iterator.hasNext()) {
+//            System.out.println("\t" + iterator.next());
+//        }
         if (entity != null) {
             try {
                 String responseString = EntityUtils.toString(entity, "UTF-8");
