@@ -15,7 +15,7 @@ public class TaskVO {
     private String PassRate;
     private  String runTime;
 
-    private ArrayList<ModuleVO> report =new ArrayList<ModuleVO>() ;
+    private ArrayList<ModuleVO> report =new ArrayList<>() ;
 
 
     public void TaskVO(int pass,int fail,ModuleVO module) {
