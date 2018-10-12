@@ -12,13 +12,13 @@ import java.util.ArrayList;
  *
  */
 public class LoadCase {
-    private static final Logger logger = LoggerFactory.getLogger(LoadCase.class);
+    private static final Logger log = LoggerFactory.getLogger(LoadCase.class);
     public static  void  main(String[] args) throws Exception {
         JSONObject JSON=new JSONObject();
         String [] Template ={"test.xls"};
         LoadCase data=new  LoadCase();
         JSON.put("test",data.LoadCase(Template));
-        logger.info(JSON.toString());
+        log.info(JSON.toString());
     }
 
 

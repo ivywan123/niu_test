@@ -14,7 +14,7 @@ import java.io.IOException;
  *
  */
 public class Inspectoscope {
-
+    private static final Logger log = LoggerFactory.getLogger(Inspectoscope.class);
 
     public String Inspectoscope(CaseVO cs,StepVO step) throws IOException {
         ParametersFactory Parameters =new  ParametersFactory();
@@ -24,14 +24,14 @@ public class Inspectoscope {
         for(int i=0;i<CheckStr.length;i++){
           String CheckArrStr=Parameters.Extraction(CheckStr[i]);
           if(calculate.calculate(CheckArrStr,response)==false){
-              Public.log("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
-              Public.logs("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
+//              Public.log("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
+              log.info("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr);
               step.setCheckList("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
               cs.setResult(false);
               step.setResult(false);
           }else{
-              Public.log("【Pass 校验成功】 步骤名：" + step.getName() + "检查点 : " + CheckArrStr);
-              Public.logs("【Pass 校验成功】 步骤名：" + step.getName() + "检查点 : " + CheckArrStr);
+//              Public.log("【Pass 校验成功】 步骤名：" + step.getName() + "检查点 : " + CheckArrStr);
+              log.info("【Pass 校验成功】 步骤名：" + step.getName() + "检查点 : " + CheckArrStr);
               step.setCheckList("【Pass 校验成功】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
           }
 

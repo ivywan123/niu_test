@@ -1,5 +1,13 @@
 package Common;
 
+
+
+
+
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.nio.CharBuffer;
 import java.text.SimpleDateFormat;
@@ -11,6 +19,8 @@ import java.util.regex.Pattern;
  *
  */
 public class Public {
+    private static final Logger log = LoggerFactory.getLogger(Public.class);
+
 
     /**
      * 读取html内容
