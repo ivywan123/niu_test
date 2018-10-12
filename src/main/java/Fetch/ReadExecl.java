@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class ReadExecl {
 public  static String smple=null;
+//    private static Logger log=Logger.get
     private static final Logger logger = LoggerFactory.getLogger(ReadExecl.class);
     public  ArrayList<CaseVO> read(String Template) throws Exception {
         Workbook wb = null;

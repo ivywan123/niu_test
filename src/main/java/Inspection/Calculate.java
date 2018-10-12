@@ -19,8 +19,24 @@ public Boolean calculate(String ArrStrA, String jsonStr) {
     try {
         if (ArrStrA.contains(">")||ArrStrA.contains("<")||ArrStrA.contains("=")||ArrStrA.contains(":")) {
 
-        if (ArrStrA.contains(">")) {
-            if(ArrStrA.contains(">=")){
+        //>
+        if (ArrStrA.contains(">") && ArrStrA.contains(">=") == false) {
+            String Arr = ArrStrA.substring(0, ArrStrA.indexOf(">"));
+            String Arr1 = ArrStrA.substring(ArrStrA.indexOf(">") + 1, ArrStrA.length());
+
+            double sortOne = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
+            double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());
+            System.out.println("sortOne:>" + sortOne + "  sortTne:" + sortTne);
+
+            if (sortOne > sortTne) {
+                ispassed = true;
+            } else {
+                ispassed = false;
+            }
+        }
+
+        //>=
+        if (ArrStrA.contains(">") && ArrStrA.contains(">=") == true) {
                 String Arr = ArrStrA.substring(0, ArrStrA.indexOf(">="));
                 String Arr1 = ArrStrA.substring(ArrStrA.indexOf(">=") + 2, ArrStrA.length());
 
@@ -33,26 +49,11 @@ public Boolean calculate(String ArrStrA, String jsonStr) {
                     ispassed = false;
                 }
             }
-            else {
-                String Arr = ArrStrA.substring(0, ArrStrA.indexOf(">"));
-                String Arr1 = ArrStrA.substring(ArrStrA.indexOf(">") + 1, ArrStrA.length());
 
-                double sortOne = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
-                double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());
-                System.out.println("sortOne:>" + sortOne + "  sortTne:" + sortTne);
-
-                if (sortOne > sortTne) {
-                    ispassed = true;
-                } else {
-                    ispassed = false;
-                }
-            }
-        }
-
-        if (ArrStrA.contains("<")) {
+        //<
+        if (ArrStrA.contains("<")  && ArrStrA.contains("<=") == false) {
             String Arr = ArrStrA.substring(0, ArrStrA.indexOf("<"));
             String Arr1 = ArrStrA.substring(ArrStrA.indexOf("<") + 1, ArrStrA.length());
-            System.out.println("Arr:"+Arr+"  Arr1:"+Arr1);
             double sortOne = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
             double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());
             System.out.println("sortOne:<"+sortOne+"  sortTne:"+sortTne);
@@ -62,6 +63,21 @@ public Boolean calculate(String ArrStrA, String jsonStr) {
                 ispassed = false;
             }
         }
+
+        //<=
+        if (ArrStrA.contains("<") && ArrStrA.contains("<=") == true) {
+            String Arr = ArrStrA.substring(0, ArrStrA.indexOf("<="));
+            String Arr1 = ArrStrA.substring(ArrStrA.indexOf("<=") + 2, ArrStrA.length());
+            double sortOne = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
+            double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());
+            System.out.println("sortOne:<="+sortOne+"  sortTne:"+sortTne);
+            if (sortOne < sortTne || sortOne == sortTne) {
+                ispassed = true;
+            } else {
+                ispassed = false;
+            }
+        }
+
         if (ArrStrA.contains("=") && ArrStrA.contains("==") == false) {
             String Arr = ArrStrA.substring(0, ArrStrA.indexOf("="));
             String Arr1 = ArrStrA.substring(ArrStrA.indexOf("=") + 1, ArrStrA.length());

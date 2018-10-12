@@ -23,8 +23,8 @@ public class SqlConnection  {
      */
     public static void loaddatabase(){
 //        ArrayList<DataBaseVO> dblist = new ArrayList<>() ;
-        //固定最多只能有两个数据库
-        for(int i=1;i<3;i++){
+        //固定最多只能有3个数据库
+        for(int i=1;i<4;i++){
             try {
                 DataBaseVO dbo = new DataBaseVO();
                 String database = ReadConfig.readconfig("DataBase"+i);
