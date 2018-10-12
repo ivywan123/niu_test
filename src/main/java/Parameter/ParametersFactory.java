@@ -14,6 +14,7 @@ import java.util.HashMap;
  *
  */
 public class ParametersFactory {
+    private static final Logger log = LoggerFactory.getLogger(ParametersFactory.class);
 private static HashMap<String, String> daoMap=new  HashMap<String, String>();
 private String VarList[];
 
@@ -49,8 +50,8 @@ private String VarList[];
                 }
             }
         }
-        Public.log("参数池: " + daoMap.toString());
-        Public.logs("参数池: " + daoMap.toString());
+//        Public.log("参数池: " + daoMap.toString());
+        log.info("参数池: " + daoMap.toString());
     }
 
 
