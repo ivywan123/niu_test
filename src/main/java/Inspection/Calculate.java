@@ -82,6 +82,8 @@ public Boolean calculate(String ArrStrA, String jsonStr) {
             String Arr = ArrStrA.substring(0, ArrStrA.indexOf("="));
             String Arr1 = ArrStrA.substring(ArrStrA.indexOf("=") + 1, ArrStrA.length());
 
+            //StrGetLS改进，包含$，用jsonpath取值
+            //否则，调用四则运算的方法
             double sortOne  = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
             double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());
             if (sortOne == sortTne) {
@@ -130,44 +132,15 @@ public String VARTOOLS(String ArrStrA, ParametersFactory polly) throws Exception
 
 public String StrGetLS(String ArrStrA, String JsonStr) throws Exception {
     String boolString = ArrStrA;
-    if (ArrStrA.contains("+")) {
-        try {
-            String key1 = getvar(ArrStrA.substring(ArrStrA.lastIndexOf("+") + 1, ArrStrA.length()),JsonStr);
-            String key2 = getvar(ArrStrA.substring(0, ArrStrA.lastIndexOf("+")),JsonStr);
-            boolString=  ArrStrA=String.valueOf(new BigDecimal(key1).add(new BigDecimal(key2)));
-        }catch(Exception e){
-        }
-
-    }
-    if (ArrStrA.contains("-")) {
-        try {
-            String key1 = getvar(ArrStrA.substring(ArrStrA.lastIndexOf("-") + 1, ArrStrA.length()),JsonStr);
-            String key2 = getvar(ArrStrA.substring(0, ArrStrA.lastIndexOf("-")),JsonStr);
-            boolString=ArrStrA=String.valueOf(new BigDecimal(key2).subtract(new BigDecimal(key1)));
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    if (ArrStrA.contains("%")) {
-        try {
-            String key1 = getvar(ArrStrA.substring(ArrStrA.lastIndexOf("%") + 1, ArrStrA.length()),JsonStr);
-            String key2 = getvar(ArrStrA.substring(0, ArrStrA.lastIndexOf("%")),JsonStr);
-            boolString=  ArrStrA=String.valueOf(new BigDecimal(key2).divide(new BigDecimal(key1)));
-        }catch(Exception e){
-        }
-
-    }
-    if (ArrStrA.contains("*")) {
-        try {
-            String key1 = getvar(ArrStrA.substring(ArrStrA.lastIndexOf("*") + 1, ArrStrA.length()),JsonStr);
-            String key2 = getvar(ArrStrA.substring(0, ArrStrA.lastIndexOf("*")),JsonStr);
-            boolString=ArrStrA=String.valueOf(new BigDecimal(key2).multiply(new BigDecimal(key1)));
-        }catch(Exception e){
-        }
-    }
     if (ArrStrA.contains("$")) {
         boolString=getvar( ArrStrA,  JsonStr);
+    }else{
+        //调用四则运算方法
+        try{
+            BigDecimal result = cal(ArrStrA).setScale(2);
+            boolString=ArrStrA=String.valueOf(result);
+        }catch(Exception e){
+        }
     }
     return boolString;
 }
@@ -190,7 +163,6 @@ public String StrGetLS(String ArrStrA, String JsonStr) throws Exception {
                 boolString=boolString.replace("\"","");
             }
         }
-
         if(ArrStrA.contains("$")==false){
             break;
         }
@@ -198,7 +170,70 @@ public String StrGetLS(String ArrStrA, String JsonStr) throws Exception {
     return boolString;
 }
 
+    /**
+     * 四则运算方法
+     */
+    public BigDecimal cal(String str) {
+        if (str == null) {
+            return null;
+        }
+        String fuhao = "";
+        int index = 0;
+        str = str.replaceAll("--", "+");// 等价替换;
+        str = str.replaceAll(" ", "");// 去掉空格
 
+        fuhao = "(";
+        index = str.lastIndexOf(fuhao);
+        if (index >= 0) {
+            int rightIndex = str.indexOf(")", index);
+            String left = str.substring(0, index);
+            String right = "";
+            if (rightIndex + 1 < str.length()) {
+                right = str.substring(rightIndex + 1);
+            }
+            BigDecimal middle = cal(str.substring(index + 1, rightIndex));
+            return cal(left + middle + right);
+        }
 
+        fuhao = "+";
+        index = str.lastIndexOf(fuhao);
+        if (index > 0) {
+            BigDecimal left = cal(str.substring(0, index));
+            BigDecimal right = cal(str.substring(index + 1));
+            return left.add(right);
+        }
+
+        fuhao = "-";
+        index = str.lastIndexOf(fuhao);
+        if (index == 0) { // 负数处理
+            BigDecimal result = cal(str.substring(index + 1));
+            if (result.compareTo(new BigDecimal("0")) == -1) { // 小于0
+                return result.abs(); // 绝对值
+            } else {
+                return result.negate(); // 相反数
+            }
+        } else if (index > 0) {
+            BigDecimal left = cal(str.substring(0, index));
+            BigDecimal right = cal(str.substring(index + 1));
+            return left.subtract(right);
+        }
+
+        fuhao = "*";
+        index = str.lastIndexOf(fuhao);
+        if (index > 0) {
+            BigDecimal left = cal(str.substring(0, index));
+            BigDecimal right = cal(str.substring(index + 1));
+            return left.multiply(right);
+        }
+
+        fuhao = "%";
+        index = str.lastIndexOf(fuhao);
+        if (index > 0) {
+            BigDecimal left = cal(str.substring(0, index));
+            BigDecimal right = cal(str.substring(index + 1));
+            return left.divide(right);
+        }
+        return new BigDecimal(str);
+    }
 
 }

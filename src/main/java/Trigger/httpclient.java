@@ -190,9 +190,9 @@ public  String  sendPost(String url,String parameter)  {
         HttpEntity entity = httpResponse.getEntity();
         System.out.println("status:" + httpResponse.getStatusLine());
         HeaderIterator iterator = httpResponse.headerIterator();
-        while (iterator.hasNext()) {
-            System.out.println("\t" + iterator.next());
-        }
+//        while (iterator.hasNext()) {
+//            System.out.println("\t" + iterator.next());
+//        }
         if (entity != null) {
             try {
                 String responseString = EntityUtils.toString(entity, "UTF-8");
