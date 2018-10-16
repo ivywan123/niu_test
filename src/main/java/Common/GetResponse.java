@@ -51,6 +51,7 @@ public class GetResponse {
             case "SQL-SELECT":
                 SqlConnection st=new SqlConnection();
                 response = st.Select(dbName,sql_url);
+//                System.out.println(response);
                 break;
             case "SQL-UPDATE":
                 new  SqlConnection().insert(dbName,sql_url);

@@ -4,8 +4,8 @@ import Common.Public;
 import Model.CaseVO;
 import Model.StepVO;
 import Parameter.ParametersFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 
 import java.io.IOException;
@@ -14,8 +14,9 @@ import java.io.IOException;
  *
  */
 public class Inspectoscope {
-    private static final Logger log = LoggerFactory.getLogger(Inspectoscope.class);
-
+//    private static final Logger log = org.apache.log4j.spi.LoggerFactory
+//            LoggerFactory.getLogger(Inspectoscope.class);
+    static Logger log= LogManager.getLogger(Inspectoscope.class);
     public String Inspectoscope(CaseVO cs,StepVO step) throws IOException {
         ParametersFactory Parameters =new  ParametersFactory();
         String CheckStr[]=step.getCheckStr().split(",");
@@ -25,7 +26,7 @@ public class Inspectoscope {
           String CheckArrStr=Parameters.Extraction(CheckStr[i]);
           if(calculate.calculate(CheckArrStr,response)==false){
 //              Public.log("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
-              log.info("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr);
+              log.error("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr);  //error时会显示为红色
               step.setCheckList("【Fail 校验失败】 步骤名："+step.getName()+"检查点 : "+CheckArrStr );
               cs.setResult(false);
               step.setResult(false);

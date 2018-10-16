@@ -2,6 +2,8 @@ package Common;
 import Configuration.ReadConfig;
 import Model.DataBaseVO;
 import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.List;
  *
  */
 public class SqlConnection  {
+    private static final Logger log = LoggerFactory.getLogger(SqlConnection.class);
     private static ArrayList<DataBaseVO> databaselist = new ArrayList<>() ;
     //    public static  String Ip= ReadConfig.readconfig("DataBase");//DataBase
 //    public static  String tableName= ReadConfig.readconfig("DataBaseName");//DataBaseName
@@ -97,24 +100,25 @@ public class SqlConnection  {
     } catch (Exception e) {
         e.printStackTrace();
     }  finally {
-        try {
-            //判断资源是否存在
-            if(rs != null) {
-                rs.close();
-                //显示的设置为空，提示gc回收
-                rs = null;
-            }
-            if(st != null) {
-                st.close();
-                st = null;
-            }
-            if(conn2 != null) {
-                conn2.close();
-                conn2 = null;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        close(conn2,st,rs);
+//        try {
+//            //判断资源是否存在
+//            if(rs != null) {
+//                rs.close();
+//                //显示的设置为空，提示gc回收
+//                rs = null;
+//            }
+//            if(st != null) {
+//                st.close();
+//                st = null;
+//            }
+//            if(conn2 != null) {
+//                conn2.close();
+//                conn2 = null;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 //     System.out.println(String.join(",",result));
     return String.join(",",result);
@@ -151,6 +155,30 @@ public class SqlConnection  {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    /**
+     * 关闭数据库连接
+     */
+    private void close(Connection con,Statement sta,ResultSet rs){
+
+        try {
+            if(rs !=null)rs.close();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        try {
+            if(sta !=null)sta.close();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        try {
+            if(con !=null)con.close();
+        } catch (Exception e) {
+            log.error(e.getMessage());
         }
     }
 

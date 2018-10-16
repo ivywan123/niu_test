@@ -49,6 +49,7 @@ public  void Main() throws Exception {
     Assignment.ReportMap(config);
     JSONObject JSON= new JSONObject();
     JSON.put("result",Assignment);
+    log.info(JSON.toString());
     Action.HtmlStr( config, Assignment, reportHtml, hreport);//结果数据处理
 
 }
