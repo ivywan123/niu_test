@@ -17,6 +17,7 @@ public class Inspectoscope {
 //    private static final Logger log = org.apache.log4j.spi.LoggerFactory
 //            LoggerFactory.getLogger(Inspectoscope.class);
     static Logger log= LogManager.getLogger(Inspectoscope.class);
+//    static Logger logger= LogManager.getLogger(Inspectoscope.class);
     public String Inspectoscope(CaseVO cs,StepVO step) throws IOException {
         ParametersFactory Parameters =new  ParametersFactory();
         String CheckStr[]=step.getCheckStr().split(",");
