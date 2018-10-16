@@ -41,8 +41,13 @@ private String VarList[];
                     String la=value.substring(2,value.length());
                     if(extra_parameter.contains(la)){
                         //从替换后的参数中取值
-                        String done=extra_parameter.substring(extra_parameter.indexOf(la)+la.length()+1,extra_parameter.indexOf("&"));
-                        setDaoMap(key,done);
+                        String[] strs=extra_parameter.split("&");
+                        for (String str : strs) {
+                            if(str.contains(la)){
+                                String done=str.substring(str.indexOf(la)+la.length()+1,str.length());
+                                setDaoMap(key,done);
+                            }
+                        }
                     }else{
                         setDaoMap(key,jpath.JsonPath(response,value));
                     }
@@ -50,7 +55,6 @@ private String VarList[];
                 }
             }
         }
-//        Public.log("参数池: " + daoMap.toString());
         log.info("参数池: " + daoMap.toString());
     }
 

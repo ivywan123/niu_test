@@ -57,7 +57,8 @@ public class SqlConnection  {
                 String user = databaselist.get(j).getUserName();
                 String pwd = databaselist.get(j).getPasswd();
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
+//                    Class.forName("com.mysql.jdbc.Driver");
+                    Class.forName("com.mysql.cj.jdbc.Driver");
                     conn = DriverManager.getConnection(url, user, pwd);
                 }catch (ClassNotFoundException e) {
                     e.printStackTrace();
