@@ -34,8 +34,8 @@ private String VarList[];
                 String Pstr=ParameterList[ium];
                 if(Pstr.contains("=")){
                     JsonAnalysis jpath=new JsonAnalysis();
-                    String key =Pstr.substring(0,Pstr.indexOf("="));
-                    String value=Pstr.substring(Pstr.indexOf("=")+1,Pstr.length());
+                    String key =Public.replaceStr(Pstr.substring(0,Pstr.indexOf("=")));
+                    String value=Public.replaceStr(Pstr.substring(Pstr.indexOf("=")+1,Pstr.length()));
 //                    JSONObject obj = JSONObject.fromObject(response);
                     //判断替换后的参数中是否有value值，如果没有，就从response中取值
                     String la=value.substring(2,value.length());
@@ -90,6 +90,7 @@ private String VarList[];
        if(ArrStr.contains("${")){
            while (ArrStr.contains("${")){
                String key =ArrStr.substring(ArrStr.indexOf("${")+2,ArrStr.indexOf("}"));
+               System.out.println(daoMap.get("cntid"));
                if(daoMap.get(key.trim())!=null){
                    ArrStr=ArrStr.replace("${"+key+"}",daoMap.get(key.trim()));
                }else{

@@ -110,9 +110,11 @@ public class Public {
 //            str=str.trim();  //去掉左右两边的空格
             Pattern p = Pattern.compile("\\s*|\t|\r|\n");
             Matcher m = p.matcher(str.trim());
-//            dest = m.replaceAll("");  //sql中有很多空格，不能去掉所有的空格
-
             dest = str;
+//            while(m.find()){
+//                dest = m.group();
+//            }
+
         }
         return dest;
     }

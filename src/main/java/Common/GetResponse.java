@@ -41,9 +41,11 @@ public class GetResponse {
         switch (Method) {
             case "GET":
                 response=send.sendGet(Url,Parameter);
+                System.out.println(response);
                 break;
             case "POST":
                 response=send.sendPost(Url,Parameter);
+                System.out.println(response);
                 break;
             case "DELETE":
                 response=send.sendDelete(Url,Parameter);
@@ -54,7 +56,9 @@ public class GetResponse {
 //                System.out.println(response);
                 break;
             case "SQL-UPDATE":
-                new  SqlConnection().insert(dbName,sql_url);
+                //返回更新的条数，固定写成参数cnt，写法为：$.cnt>0
+                response = new  SqlConnection().insert(dbName,sql_url);
+                System.out.println(response);
                 break;
             case "SLEEP":
                 response = Action.sleep(Url);

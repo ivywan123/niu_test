@@ -128,17 +128,19 @@ public class SqlConnection  {
      * 插入修改 删除
      * @param sql
      */
-    public  void insert (String databaseName,String sql) {
+    public  String insert (String databaseName,String sql) {
         System.out.println( sql);
+        List<String> result = new ArrayList<String>();
         Connection conn3 = null;
         Statement st = null;
+        int res=0;  //返回更新的记录条数，如果返回为0，表示未更新
         try {
 //            Class.forName("com.mysql.jdbc.Driver");
 //            conn = DriverManager.getConnection(url,user,pwd);
             conn3 = getconnect(databaseName);
             st = conn3.createStatement();
             //注意，此处是excuteUpdate()方法执行
-            st.executeUpdate(sql);
+            res=st.executeUpdate(sql);
             //分别捕获异常
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,6 +158,10 @@ public class SqlConnection  {
                 e.printStackTrace();
             }
         }
+        JSONObject json_obj = new JSONObject();
+        json_obj.put("cnt", String.valueOf(res));
+        result.add(json_obj.toString());
+        return String.join(",",result);
     }
 
     /**

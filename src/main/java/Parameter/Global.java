@@ -60,13 +60,22 @@ public class Global {
     public static String Time(String TimeFormat) {
         SimpleDateFormat	df	=null;
         if(TimeFormat==null){
-            df	= new SimpleDateFormat( "yyyyMMddHHmmss" );
+            df	= new SimpleDateFormat( "yyyy-MM-dd 00:00:00" );
         }else{
             df	= new SimpleDateFormat(TimeFormat );
         }
         String	time	= df.format( new Date() );
         return(time);
     }
+
+    public static void main(String[] args) throws Exception {
+        Global cn=new Global();
+        String str=null;
+        String str2="yyyy-MM-dd HH:mm:ss";
+        System.out.println(cn.Time(str));
+        System.out.println(cn.Time(str2));
+    }
+
 
     /**
      * 获取当前日期
