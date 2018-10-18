@@ -4,6 +4,7 @@ import Model.ConfigVO;
 import Model.StepVO;
 import Parameter.ParametersFactory;
 import Trigger.httpclient;
+import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

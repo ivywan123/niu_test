@@ -5,6 +5,7 @@ import Fetch.LoadCase;
 import Model.*;
 import java.util.ArrayList;
 
+import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -30,6 +31,7 @@ public Implement doIt=new Implement();
  */
 @Test
 public  void Main() throws Exception {
+    BasicConfigurator.configure();
     long startTime = System.currentTimeMillis();
     Module=judy.LoadCase(config.getFileList());    //数据装箱
     //遍历moduleList
