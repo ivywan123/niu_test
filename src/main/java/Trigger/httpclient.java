@@ -213,16 +213,27 @@ public  String  sendPost(String url,String parameter)  {
         }
         String JSESSIONID =new String();
         if(setCookie.isEmpty()==false) {
-             JSESSIONID = setCookie.substring("JSESSIONID=".length(),
-                    setCookie.indexOf(";"));
+            if(setCookie.contains("JSESSIONID=")) {
+                JSESSIONID = setCookie.substring("JSESSIONID=".length(),
+                        setCookie.indexOf(";"));
+
+                BasicClientCookie cookie = new BasicClientCookie("JSESSIONID",
+                        JSESSIONID);
+                cookie.setVersion(0);
+                cookie.setDomain("127.0.0.1");
+                cookie.setPath("/CwlProClient");
+                cookieStore.addCookie(cookie);
+            }
+
         }
         // 新建一个Cookie
-        BasicClientCookie cookie = new BasicClientCookie("JSESSIONID",
-                JSESSIONID);
-        cookie.setVersion(0);
-        cookie.setDomain("127.0.0.1");
-        cookie.setPath("/CwlProClient");
-        cookieStore.addCookie(cookie);
+//            BasicClientCookie cookie = new BasicClientCookie("JSESSIONID",
+//                    JSESSIONID);
+//            cookie.setVersion(0);
+//            cookie.setDomain("127.0.0.1");
+//            cookie.setPath("/CwlProClient");
+//            cookieStore.addCookie(cookie);
+
     }
 
 

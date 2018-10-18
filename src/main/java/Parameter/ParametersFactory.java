@@ -90,7 +90,6 @@ private String VarList[];
        if(ArrStr.contains("${")){
            while (ArrStr.contains("${")){
                String key =ArrStr.substring(ArrStr.indexOf("${")+2,ArrStr.indexOf("}"));
-               System.out.println(daoMap.get("cntid"));
                if(daoMap.get(key.trim())!=null){
                    ArrStr=ArrStr.replace("${"+key+"}",daoMap.get(key.trim()));
                }else{

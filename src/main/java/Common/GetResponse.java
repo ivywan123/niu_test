@@ -4,12 +4,14 @@ import Model.ConfigVO;
 import Model.StepVO;
 import Parameter.ParametersFactory;
 import Trigger.httpclient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  */
 public class GetResponse {
-
+    private static final Logger log = LoggerFactory.getLogger(GetResponse.class);
     /**
      * 分解步骤请求方式，获取步骤返回值
       * @param step
@@ -41,19 +43,20 @@ public class GetResponse {
         switch (Method) {
             case "GET":
                 response=send.sendGet(Url,Parameter);
-                System.out.println(response);
+                log.info("【response:】"+response);
                 break;
             case "POST":
                 response=send.sendPost(Url,Parameter);
-                System.out.println(response);
+                log.info("【response:】"+response);
                 break;
             case "DELETE":
                 response=send.sendDelete(Url,Parameter);
+                log.info("【response:】"+response);
                 break;
             case "SQL-SELECT":
                 SqlConnection st=new SqlConnection();
                 response = st.Select(dbName,sql_url);
-//                System.out.println(response);
+                log.info("【response:】"+response);
                 break;
             case "SQL-UPDATE":
                 //返回更新的条数，固定写成参数cnt，写法为：$.cnt>0

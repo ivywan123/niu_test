@@ -19,11 +19,11 @@ import java.util.ArrayList;
  */
 public class ReadExecl {
 public  static String smple=null;
-//    private static Logger log=Logger.get
-    private static final Logger logger = LoggerFactory.getLogger(ReadExecl.class);
+    private static final Logger log = LoggerFactory.getLogger(ReadExecl.class);
     public  ArrayList<CaseVO> read(String Template) throws Exception {
         Workbook wb = null;
-        Public.logLayout("【数据装箱】： FileName:"+ReadConfig.readconfig("Templatepath")+Template);
+//        Public.logLayout("【数据装箱】： FileName:"+ReadConfig.readconfig("Templatepath")+Template);
+        log.info("【数据装箱】： FileName:"+ReadConfig.readconfig("Templatepath")+Template);
         File FileSytem =new File(ReadConfig.readconfig("Templatepath")+Template);
         wb = Workbook.getWorkbook(FileSytem);
         ArrayList<CaseVO> list = new ArrayList<CaseVO>();

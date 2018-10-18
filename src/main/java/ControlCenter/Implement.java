@@ -28,7 +28,6 @@ public class Implement {
         for(int i=0;i<CaseList.size();i++){
             String caseName=CaseList.get(i).getName();
             String caseLevel=CaseList.get(i).getLevel();
-//            Public.log("【用例名称】:"+caseName+"\n【用例等级】:"+caseLevel);
             log.info("【用例名称】:"+caseName+"\n【用例等级】:"+caseLevel);
             ResolveCase(config,CaseList.get(i));
             if(CaseList.get(i).getResult()){
@@ -65,9 +64,9 @@ public class Implement {
             GetResponse response=new GetResponse();
             Inspectoscope check=new Inspectoscope();
             String StepName=stepList.get(i).getName();
-            System.out.println(stepList.get(i).getUrl());
-//            Public.log("【步骤名称】:"+StepName);
+//            System.out.println(stepList.get(i).getUrl());
             log.info("【步骤名称】:"+StepName);
+            log.info("【步骤URL】:"+stepList.get(i).getUrl());
             stepList.get(i).setResponse(response.GetResponse(config,stepList.get(i)));
             //取参数和做断言换执行顺序，有些接口的断言要根据从data中取到的参数做计算
             if(stepList.get(i).getTransfer()!=null){  //判断是否需要提取参数

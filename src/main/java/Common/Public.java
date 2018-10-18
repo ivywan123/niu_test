@@ -110,7 +110,7 @@ public class Public {
 //            str=str.trim();  //去掉左右两边的空格
             Pattern p = Pattern.compile("\\s*|\t|\r|\n");
             Matcher m = p.matcher(str.trim());
-            dest = str;
+            dest = str.trim();
 //            while(m.find()){
 //                dest = m.group();
 //            }
@@ -154,7 +154,18 @@ public class Public {
     }
 
     public static  void main( String []args) throws IOException{
-        System.out.println(html(  Action.path+"mail/mail.txt" ));
+//        System.out.println(html(  Action.path+"mail/mail.txt" ));
+        String regEx = "\n\r";
+        String s = "/V1.0/user/appverifycode     ";
+        System.out.println(s.trim());
+//        Pattern pat = Pattern.compile(regEx);
+        Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+        Matcher mat = p.matcher(s.trim());
+        boolean rs = mat.find();
+
+        for(int i=1;i<=mat.groupCount();i++){
+            System.out.println(mat.group(i));
+        }
     }
 
 
