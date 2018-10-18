@@ -59,13 +59,13 @@ public class Global {
      */
     public static String Time(String TimeFormat) {
         SimpleDateFormat	df	=null;
-        if(TimeFormat==null){
+        if(TimeFormat==null || "".equals(TimeFormat)){
             df	= new SimpleDateFormat( "yyyy-MM-dd 00:00:00" );
         }else{
             df	= new SimpleDateFormat(TimeFormat );
         }
         String	time	= df.format( new Date() );
-        return(time);
+        return time;
     }
 
     public static void main(String[] args) throws Exception {

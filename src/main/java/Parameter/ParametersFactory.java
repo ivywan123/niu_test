@@ -101,9 +101,9 @@ private String VarList[];
         //替换当前时间VarTime()
         if(ArrStr.contains("VarTime")){
             if(ArrStr.contains("VarTime(")){
-               String done=ArrStr.substring(ArrStr.indexOf("VarTime(")+8,ArrStr.indexOf(")"));
-               ArrStr=ArrStr.replaceAll("VarTime("+done+")",Global.Time(done));
-
+                String done=ArrStr.substring(ArrStr.indexOf("VarTime(")+8,ArrStr.indexOf(")"));
+//                ArrStr=ArrStr.replaceAll("VarTime("+done+")",Global.Time(done));
+                ArrStr=ArrStr.replace("VarTime("+done+")",Global.Time(done));
             }else{
                ArrStr=ArrStr.replaceAll("VarTime",Global.Time(null));
             }
@@ -177,18 +177,15 @@ private String VarList[];
         return ArrStr;
     }
     public static void main(String[] args){
-        String str="VarTime(2017-8-10 09:30:28)";
-        if(str.contains("VarTime")){
-            if(str.contains("VarTime(")){
-                String done=str.substring(str.indexOf("VarTime(")+8,str.indexOf(")"));
-                System.out.println(done);
-                str=str.replaceAll("VarTime("+done+")",Global.Time(done));
+        ParametersFactory pf=new ParametersFactory();
+        String str="cntrsys:update wftransaction set endTradeDate =\"VarTime()\" where id =${tradeid2};";
+        try {
+            String b = Extraction(str);
+            System.out.println(b);
+        }catch (Exception e){
 
-            }else{
-                str=str.replaceAll("VarTime",Global.Time(null));
-            }
-            System.out.println(str);
         }
+
         }
 
     }
