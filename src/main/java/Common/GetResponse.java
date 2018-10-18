@@ -27,7 +27,7 @@ public class GetResponse {
         String Method = step.getMethod().toUpperCase();
         if(( "POST".equals(Method) ) || "GET".equals(Method) || "DELETE".equals(Method)) {
             Url = config.getEnvironment() + Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
-        } else if(( "SQL-SELECT".equals(Method) ) || "SQL-UPDATE".equals(Method)){
+        } else if(( "SQL-SELECT".equals(Method) ) || "SQL-UPDATE".equals(Method) || "SLEEP".equals(Method)){
             //如果需要查询数据库，Url要做切割，以冒号分割
             Url = Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
             if(Url.contains(":")){
@@ -46,6 +46,8 @@ public class GetResponse {
                 log.info("【response:】"+response);
                 break;
             case "POST":
+                System.out.println(Url);
+                System.out.println(Parameter);
                 response=send.sendPost(Url,Parameter);
                 log.info("【response:】"+response);
                 break;
@@ -54,6 +56,7 @@ public class GetResponse {
                 log.info("【response:】"+response);
                 break;
             case "SQL-SELECT":
+                System.out.println(sql_url);
                 SqlConnection st=new SqlConnection();
                 response = st.Select(dbName,sql_url);
                 log.info("【response:】"+response);

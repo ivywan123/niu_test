@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 public class Calculate {
 
 public static void main(String[] args) {
+    Calculate  ca=new Calculate();
+    System.out.println(ca.calculate("$.cnt>=1","{\"cnt\":\"1\"}"));
 
 }
 
@@ -42,7 +44,7 @@ public Boolean calculate(String ArrStrA, String jsonStr) {
 
                 double sortOne = Double.parseDouble(StrGetLS(Arr, jsonStr).trim());
                 double sortTne = Double.parseDouble(StrGetLS(Arr1, jsonStr).trim());
-                System.out.println("sortOne:>=" + sortOne + "  sortTne:" + sortTne);
+                System.out.println(sortOne + " >= "+ sortTne);
                 if (sortOne > sortTne || sortOne == sortTne) {
                     ispassed = true;
                 } else {
