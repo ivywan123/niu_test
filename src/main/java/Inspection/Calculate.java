@@ -147,6 +147,24 @@ public String StrGetLS(String ArrStrA, String JsonStr) throws Exception {
     return boolString;
 }
 
+/**
+ * 添加data中的参数运算
+ *
+ */
+public String para_GetLS(String ArrStrA){
+    String resultStr = ArrStrA;
+    if (ArrStrA.contains("+") || ArrStrA.contains("-")||ArrStrA.contains("*") ||ArrStrA.contains("%")) {
+        //调用四则运算方法
+        try{
+            BigDecimal result = cal(ArrStrA).setScale(2);
+            resultStr=ArrStrA=String.valueOf(result);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    return resultStr;
+}
+
 
     /**
      *节点值提取

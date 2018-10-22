@@ -2,6 +2,7 @@ package Parameter;
 
 
 import Common.Public;
+import Inspection.Calculate;
 import Inspection.JsonAnalysis;
 import Model.StepVO;
 import net.sf.json.JSONObject;
@@ -20,7 +21,7 @@ private String VarList[];
 
 
     /**
-     * 参数提取
+     * 从data和response中参数提取
      * @param step
      * @throws IOException
      */
@@ -58,7 +59,32 @@ private String VarList[];
         log.info("参数池: " + daoMap.toString());
     }
 
+    /**
+     * 替换接口中的参数和运算等
+     *
+     * @return
+     */
+    public static String get_para(String para){
+        Calculate ca = new Calculate();
+        String str=new String(para);
+        String Parameter="";
+        if(para!=null){
+            String ParameterList[]=para.split("&");
+            for(int ium=0;ium<ParameterList.length;ium++) {
+                String Pstr=ParameterList[ium];
+                String key =Public.replaceStr(Pstr.substring(0,Pstr.indexOf("=")));
+                try {
+                    String value = Public.replaceStr(ca.para_GetLS(ParametersFactory.Extraction(Pstr.substring(Pstr.indexOf("=") + 1, Pstr.length()))));
+                  Parameter+=key+"="+value+"&";
+                }catch (Exception e){
 
+                }
+            }
+
+        }
+
+        return Parameter.substring(0,Parameter.lastIndexOf("&"));
+    }
 
     public HashMap<String, String> getDaoMap() {
         return daoMap;

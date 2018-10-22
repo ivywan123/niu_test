@@ -1,5 +1,6 @@
 package Common;
 
+import Inspection.Calculate;
 import Model.ConfigVO;
 import Model.StepVO;
 import Parameter.ParametersFactory;
@@ -24,10 +25,13 @@ public class GetResponse {
         String Url = "";
         String dbName="";
         String sql_url="";
+        String Parameter="";
+        Calculate ca=new Calculate();
         //url的组装，将路径前半部分从配置文件中取
         String Method = step.getMethod().toUpperCase();
         if(( "POST".equals(Method) ) || "GET".equals(Method) || "DELETE".equals(Method)) {
             Url = config.getEnvironment() + Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
+            Parameter = ParametersFactory.get_para(step.getParameter());
         } else if(( "SQL-SELECT".equals(Method) ) || "SQL-UPDATE".equals(Method) || "SLEEP".equals(Method)){
             //如果需要查询数据库，Url要做切割，以冒号分割
             Url = Public.replaceStr(ParametersFactory.Extraction(step.getUrl()));
@@ -36,7 +40,8 @@ public class GetResponse {
                 sql_url = Public.replaceStr(Url.substring(Url.indexOf(":")+1,Url.length()));
             }
         }
-        String Parameter=Public.replaceStr(ParametersFactory.Extraction(step.getParameter()));
+//        String Parameter=Public.replaceStr(ca.para_GetLS(ParametersFactory.Extraction(step.getParameter())));
+
         //保存替换后的参数
         step.setExtra_parameter(Parameter);
         httpclient send=new  httpclient();
