@@ -78,7 +78,11 @@ public class HtmlReport {
         StepStr = StepStr.replace("URL",step.getUrl());
         StepStr = StepStr.replace("method",step.getMethod());
         StepStr = StepStr.replace("requestStr",step.getUrl()+step.getParameter());
-        StepStr = StepStr.replace("JsonStr",step.getResponse());
+        System.out.println(step.getName());
+        System.out.println(step.getResponse());
+        if(step.getResponse() != null) {
+            StepStr = StepStr.replace("JsonStr", step.getResponse());
+        }
         for(int k=0;k<checkList.size();k++) {
             checkBuffer.append("<tr> <td nowrap>检查步骤-"+k+"</td><td>"+checkList.get(k)+"</td></tr>");
         }
