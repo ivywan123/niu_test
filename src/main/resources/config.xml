@@ -3,7 +3,7 @@
 
   <!-- 数据库配置-->
   <DataBase1>192.168.1.70</DataBase1>
-  <DataBaseName1>new_platform</DataBaseName1>
+  <DataBaseName1>gu100</DataBaseName1>
   <UserName1>root</UserName1>
   <Passwd1>root</Passwd1>
 
@@ -20,7 +20,7 @@
   <Passwd3>root</Passwd3>
 
 <!--设置测试用例运行环境，为测试环境，准生产或生产-->
-<environment>http://192.168.1.74:7070</environment>
+<environment>http://192.168.1.74:7080</environment>
 
 <!-- 报告接收多个邮箱以“,”隔开-->
 <mail>363701080@qq.com</mail>
@@ -33,6 +33,6 @@
 
   <!--  用例文件路径配置-->
 <Templatepath>D:\TestSpace\Template\</Templatepath>
-<Template>caiyun0.xls</Template>
+<Template>gu100-p03.xls</Template>
 
 </config>

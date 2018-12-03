@@ -3,8 +3,13 @@ import Common.Action;
 import Common.Public;
 import Fetch.LoadCase;
 import Model.*;
-import java.util.ArrayList;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Properties;
+
+import com.mchange.v2.util.PropertiesUtils;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
@@ -32,7 +37,14 @@ public Implement doIt=new Implement();
  */
 @Test
 public  void Main() throws Exception {
-    PropertyConfigurator.configure("src/main/resources/log4j.properties");
+//    PropertyConfigurator.configure("src/main/resources/log4j.properties");
+//    PropertyConfigurator.configure(EntryDoor.class.getClassLoader().getResourceAsStream(""));
+    Properties p = new Properties();
+    InputStream in = null;
+    in = EntryDoor.class.getClassLoader().getResourceAsStream("log4j.properties");
+    p.load(in);
+    PropertyConfigurator.configure(p);
+
     long startTime = System.currentTimeMillis();
     Module=judy.LoadCase(config.getFileList());    //数据装箱
     //遍历moduleList
@@ -58,6 +70,7 @@ public  void Main() throws Exception {
 }
 
     public static void main(String[] args) throws Exception {
+        System.out.println(System.getProperty("user.dir"));
         EntryDoor EntryDoor=new EntryDoor();
         EntryDoor.Main();
     }

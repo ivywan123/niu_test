@@ -9,28 +9,35 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class ReadConfig {
-
 
     public static void main(String[] args) {
        System.out.println(readconfig("Template"));
     }
-
+    private static InputStream getConfig(){
+        String configPath = System.getProperty("user.dir")+ File.separator+"config.xml";
+        try{
+            return new FileInputStream(configPath);
+        }catch (Exception e){
+            System.out.println(String.format("config文件找不到【%s】",configPath));
+        }
+        return ReadConfig.class.getClassLoader().getResourceAsStream("config.xml");
+    }
     /**
      * 配置读取工具
      * @param edge
      * @return
      */
     public  static String readconfig(String edge) {
-    	String currentPath = System.getProperty("user.dir");
+
     	String Key=null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = factory.newDocumentBuilder();
-            Document doc = db.parse(new File(currentPath+"/config.xml"));
+//            Document doc = db.parse(new File(currentPath+"/config.xml"));
+            Document doc = db.parse(getConfig());
             Element elmtInfo = doc.getDocumentElement();
             NodeList nodes = elmtInfo.getChildNodes();
             for (int i = 0; i < nodes.getLength(); i++)
