@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="gbk"?>
+<config>
+
+  <!-- 数据库配置-->
+  <DataBase1>192.168.1.70</DataBase1>
+  <DataBaseName1>new_platform</DataBaseName1>
+  <UserName1>root</UserName1>
+  <Passwd1>root</Passwd1>
+
+  <!-- 数据库配置-->
+  <DataBase2>192.168.1.60</DataBase2>
+  <DataBaseName2>cntrsys</DataBaseName2>
+  <UserName2>root</UserName2>
+  <Passwd2>root</Passwd2>
+
+  <!-- 数据库配置-->
+  <DataBase3>192.168.1.60</DataBase3>
+  <DataBaseName3>niudb</DataBaseName3>
+  <UserName3>root</UserName3>
+  <Passwd3>root</Passwd3>
+
+  <!--设置测试用例运行环境，为测试环境，准生产或生产-->
+  <environment>http://192.168.1.74:7070</environment>
+
+  <!-- 报告接收多个邮箱以“,”隔开-->
+  <mail>363701080@qq.com</mail>
+
+  <!--  指定Case等级Run  -->
+  <Level>P0,P1,P2</Level>
+
+  <!--  工作目录  -->
+  <path>D:\TestSpace\</path>
+
+  <!--  用例文件路径配置-->
+  <Templatepath>D:\TestSpace\Template\</Templatepath>
+  <Template>caiyun0.xls</Template>
+
+</config>

@@ -16,6 +16,7 @@ public class ReadConfig {
     public static void main(String[] args) {
        System.out.println(readconfig("Template"));
     }
+
     private static InputStream getConfig(){
         String configPath = System.getProperty("user.dir")+ File.separator+"config.xml";
         try{
@@ -25,6 +26,7 @@ public class ReadConfig {
         }
         return ReadConfig.class.getClassLoader().getResourceAsStream("config.xml");
     }
+
     /**
      * 配置读取工具
      * @param edge
