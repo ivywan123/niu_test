@@ -29,10 +29,10 @@
   <Level>P0,P1,P2</Level>
 
   <!--  工作目录  -->
-  <path>D:\TestSpace\</path>
+  <path>\var\TestSpace\</path>
 
   <!--  用例文件路径配置-->
-  <Templatepath>D:\TestSpace\Template\</Templatepath>
+  <Templatepath>\var\TestSpace\Template\</Templatepath>
   <Template>caiyun0.xls</Template>
 
 </config>
